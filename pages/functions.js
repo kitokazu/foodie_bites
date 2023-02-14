@@ -6,14 +6,10 @@ export default function Sum() {
   const [num2, setNum2] = useState(0);
   const [sum, setSum] = useState(0);
 
-  const add = () => {
-    const newSum = addition(num1, num2);
-    setSum(newSum);
-  }
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    add();
+    const newSum = addition(num1, num2)
+    setSum(newSum);
   };
 
   return (
