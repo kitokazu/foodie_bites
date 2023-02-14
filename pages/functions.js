@@ -1,14 +1,19 @@
 import { useState } from 'react';
+import {sum as addition} from './sum';
 
 export default function Sum() {
   const [num1, setNum1] = useState(0);
   const [num2, setNum2] = useState(0);
   const [sum, setSum] = useState(0);
 
+  const add = () => {
+    const newSum = addition(num1, num2);
+    setSum(newSum);
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newSum = num1 + num2;
-    setSum(newSum);
+    add();
   };
 
   return (
