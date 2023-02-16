@@ -1,17 +1,3 @@
-// module.exports = {
-//   preset: 'ts-jest',
-//   transform: {
-//     '^.+\\.(ts|tsx)?$': 'ts-jest',
-//     "^.+\\.(js|jsx)$": "babel-jest",
-//   }
-// };
-
-// // module.exports = {
-// //   testEnvironment: 'node',
-// //   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
-// // };
-
-
 const nextJest = require('next/jest')
 
 const createJestConfig = nextJest({
@@ -21,7 +7,6 @@ const createJestConfig = nextJest({
 
 // Add any custom config to be passed to Jest
 const customJestConfig = {
-  // setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
   moduleNameMapper: {
     // Handle module aliases (this will be automatically configured for you soon)
     '^@/components/(.*)$': '<rootDir>/components/$1',
