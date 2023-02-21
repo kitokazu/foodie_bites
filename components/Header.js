@@ -4,6 +4,8 @@ import McDonalds from '../images/mcdonalds_logo.png';
 import {
   MagnifyingGlassIcon,
   HomeIcon,
+  UserCircleIcon,
+  Bars3Icon
 } from "@heroicons/react/24/outline";
 
 function Header() {
@@ -37,8 +39,10 @@ function Header() {
         </div>
 
         {/* Right Side */}
-        <div>
-          <HomeIcon className="h-10 w-10"/>
+        <div className="flex items-center justify-end space-x-4">
+          <HomeIcon className="navBtn"/>
+          <UserCircleIcon className="navBtn"/>
+          <Bars3Icon className="h-6 md:hidden cursor-pointer"/>
         </div>
 
       </div>
