@@ -1,5 +1,5 @@
 // Create a test for add function in pages/functions.js
-import { sum } from '../sum';
+import { sum } from '../math.utils';
 
 describe('sum module', () => {
   test('adds 1 + 2 to equal 3', () => {
