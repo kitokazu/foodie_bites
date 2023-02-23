@@ -9,7 +9,21 @@ import {
   EnvelopeIcon
 } from "@heroicons/react/24/outline";
 
+import { useRouter } from 'next/router'
+
 function Header() {
+  const router = useRouter();
+
+  const routeAddNums = e => {
+    e.preventDefault()
+    router.push('/addNums')
+  };
+
+  const routeProfile  = e => {
+    e.preventDefault()
+    router.push('/addNums')
+  }
+
   return (
     <div className="shadow-sm border-b bg-white sticky top-0 z-50">
       <div className="flex justify-between bg-white max-w-6xl mx-5 xl:mx-auto">
@@ -43,9 +57,9 @@ function Header() {
         {/* Right Side */}
         <div className="flex items-center justify-end space-x-4">
           <HomeIcon className="navBtn"/>
-          <UserCircleIcon className="navBtn"/>
+          <UserCircleIcon className="navBtn" onClick={routeProfile}/>
           <div className="relative navBtn">
-            <EnvelopeIcon className="navBtn"/>
+            <EnvelopeIcon className="navBtn" onClick={routeAddNums}/>
             <div className="absolute -top-2 -right-2 text-s w-5 h-5 bg-red-500 rounded-full flex items-center justify-center animate-pulse text-white">3</div>
           </div>
           <Bars3Icon className="h-6 md:hidden cursor-pointer"/>
