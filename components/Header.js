@@ -6,7 +6,8 @@ import {
   HomeIcon,
   UserCircleIcon,
   Bars3Icon,
-  EnvelopeIcon
+  EnvelopeIcon,
+  ShoppingCartIcon
 } from "@heroicons/react/24/outline";
 
 import { useRouter } from 'next/router'
@@ -19,10 +20,16 @@ function Header() {
     router.push('/addNums')
   };
 
-  const routeProfile  = e => {
+  const routeProfilePage = e => {
     e.preventDefault()
-    router.push('/addNums')
-  }
+    router.push('/profilePage')
+  };
+
+  const routeHomePage = e => {
+    e.preventDefault()
+    router.push('/')
+  };
+
 
   return (
     <div className="shadow-sm border-b bg-white sticky top-0 z-50">
@@ -56,11 +63,15 @@ function Header() {
 
         {/* Right Side */}
         <div className="flex items-center justify-end space-x-4">
-          <HomeIcon className="navBtn"/>
-          <UserCircleIcon className="navBtn" onClick={routeProfile}/>
+          <HomeIcon className="navBtn" onClick={routeHomePage}/>
+          <UserCircleIcon className="navBtn" onClick={routeProfilePage}/>
           <div className="relative navBtn">
             <EnvelopeIcon className="navBtn" onClick={routeAddNums}/>
             <div className="absolute -top-2 -right-2 text-s w-5 h-5 bg-red-500 rounded-full flex items-center justify-center animate-pulse text-white">3</div>
+          </div>
+          <div className="relative navBtn">
+            <ShoppingCartIcon className="navBtn" onClick={routeAddNums}/>
+            <div className="absolute -top-2 -right-2 text-s w-5 h-5 bg-red-500 rounded-full flex items-center justify-center animate-pulse text-white">1</div>
           </div>
           <Bars3Icon className="h-6 md:hidden cursor-pointer"/>
         </div>

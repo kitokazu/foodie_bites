@@ -20,7 +20,7 @@ export default function Sum() {
   return (
     <div className={styles.main}>
       <form onSubmit={handleSubmit}>
-        <label className={styles.denscription}>
+        <label className={styles.description}>
           Number 1:
           <input type="number" value={num1} onChange={(e) => setNum1(parseInt(e.target.value))} />
         </label>
@@ -30,9 +30,10 @@ export default function Sum() {
           <input type="number" value={num2} onChange={(e) => setNum2(parseInt(e.target.value))} />
         </label>
         <br />
-        <button type="submit">Calculate Sum</button>
+        <button className="px-4 py-1 text-sm text-purple-600 font-semibold rounded-full border border-purple-200 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2" type="submit">Calculate Sum</button>
+        {<p className='mt-1 relative p-3 text-red-500'>{sum}</p>}
       </form>
-      {<p className={styles.thirteen}>{sum}</p>}
+      
     </div>
   );
 }
