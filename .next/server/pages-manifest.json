@@ -2,7 +2,6 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/addNums": "pages/addNums.js",
   "/profilePage": "pages/profilePage.js",
   "/": "pages/index.js"
 }

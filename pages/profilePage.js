@@ -4,6 +4,7 @@ import { Inter } from '@next/font/google';
 import styles from '@/styles/Home.module.css'
 import Head from 'next/head'
 import Header from '@/components/Header'
+import Profile from '@/components/Profile'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,7 +18,7 @@ export default function profilePage() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <h1>PROFILE</h1>
+      <Profile />
     </>
   )
 }

@@ -30,11 +30,6 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/addNums": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/addNums.js"
-    ],
     "/profilePage": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",

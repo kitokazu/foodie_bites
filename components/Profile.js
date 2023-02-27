@@ -8,13 +8,17 @@ import { useRouter } from 'next/router'
 function ProfilePage() {
   return (
     <>
-      <div className="">
-        {/* Picture */}
-        <Image src={McDonalds_Logo}
-          alt="McDonalds Logo"
-          fill="contain"
-          style={{objectFit: "contain"}}
-          />
+      <div className="fixed top-0 h-screen w-72 m-0 flex flex-col bg-gray-100 shadow-lg">
+        
+         {/* Add "Profile" Text */}
+          <i>A</i>
+          <i>B</i>
+          {/* Picture */}
+          {/* <Image src={McDonalds_Logo}
+            alt="McDonalds Logo"
+            fill="contain"
+            style={{objectFit: "contain"}}
+          /> */}
       </div>
     </>
   );
