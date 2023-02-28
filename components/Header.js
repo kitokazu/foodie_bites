@@ -62,7 +62,7 @@ function Header() {
         </div>
 
         {/* Right Side */}
-        <div className="flex items-center justify-end space-x-4">
+        <div className="flex dark:text-black items-center justify-end space-x-4">
           <HomeIcon className="navBtn" onClick={routeHomePage}/>
           <UserCircleIcon className="navBtn" onClick={routeProfilePage}/>
           <div className="relative navBtn">
