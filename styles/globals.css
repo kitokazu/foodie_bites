@@ -6,6 +6,10 @@
   .navBtn {
     @apply hidden h-10 md:inline-flex cursor-pointer hover:scale-125 transition-all duration-150 ease-out;
   }
+
+  .menuItem {
+    @apply block pb-10 hover:text-stone-700 hover:scale-125 transition-all duration-150 ease-out;
+  }
 }
 
 :root {
