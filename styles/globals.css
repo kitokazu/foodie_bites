@@ -2,14 +2,73 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
 @layer components {
   .navBtn {
     @apply hidden h-10 md:inline-flex cursor-pointer hover:scale-125 transition-all duration-150 ease-out;
   }
 
   .menuItem {
-    @apply block pb-10 hover:text-stone-700 hover:scale-125 transition-all duration-150 ease-out;
+    @apply block pb-10 hover:text-stone-700 hover:scale-125 transition-all duration-150 ease-out relative;
+    z-index: 2;
   }
+
+  .sideBarProfile {
+    @apply hidden md:block absolute top-0 left-0 w-1/2 h-screen bg-stone-700;
+  }
+
+  /* .menuBackground {
+    background-image: radial-gradient(black 1px);
+    background-size: 20px 20px;
+  } */
+
+  .signIn {
+    @apply px-4 py-1 text-sm text-purple-600 font-semibold rounded-full border border-purple-200 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2;
+  }
+
+  .bg-radial {
+    background-image: radial-gradient(
+      rgba(225, 225, 255, 0.1) 9%,
+      transparent 9%
+    );
+  }
+  
+  .bg-left-top {
+    background-color: rgba(0, 0, 0, 0.1);
+    background-position: left top;
+    background-size: 12vmin 12vmin;
+  }
+  
+  .menuBackground {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+  }
+
+  
+/*   
+  .menuBackground{
+    height: 100vh;
+    width: 100vw;
+
+    background-image: radial-gradient(
+      rgba(225, 225, 255, 0.1) 100%,
+      transparent 9%
+    );
+
+    background-color: #00000010;
+
+    background-position: 0%, 0%;
+    background-size: 12vmin 12vmin;
+
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: 1;
+  } */
+
 }
 
 :root {

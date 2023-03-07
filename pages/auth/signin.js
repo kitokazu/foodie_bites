@@ -8,7 +8,9 @@ function signIn({ providers }) {
     <div className="flex flex-col items-center
                 justify-center min-h-screen py-2 
                 -mt-56 px-14 text-center">
-        <img className="w-80" src="https://links.papareact.com/ocw"/>
+        <div className="text-3xl font-serif text-stone-600 mt-5 ml-5">
+          STYLESHARE
+        </div>
         <div className="mt-40">
         {Object.values(providers).map((provider) => (
             <div key={provider.name}>

@@ -39,22 +39,22 @@ function Header() {
     <div className="shadow-sm border-b bg-white sticky top-0 z-50">
       <div className="flex justify-between bg-white max-w-6xl mx-5 xl:mx-auto">
         {/* Left Side */}
-        <div className="relative hidden lg:inline w-36 h-12 cursor-pointer">
-          <Image 
+        <div className="relative hidden lg:inline w-36 h-12 cursor-pointer" onClick={routeHomePage}>
+          {/* <Image 
             src={McDonalds_Long}
             alt="McDonalds Logo"
             fill="contain"
             style={{objectFit: "contain"}}
-            />
+            /> */}
+            <div className="text-3xl font-serif text-stone-600 mt-5 ml-5">
+              STYLESHARE
+            </div>
         </div>
 
         <div className="relative w-24 h-24 lg:hidden flex-shrink-0 cursor-pointer">
-          <Image 
-            src={McDonalds}
-            alt="McDonalds Logo"
-            fill="contain"
-            style={{objectFit: "contain"}}
-            />
+            <div className="text-3xl font-serif text-stone-600 mt-5 ml-5">
+              SS
+            </div>
         </div>
 
         {/* Center --- SEARCH BAR */}
