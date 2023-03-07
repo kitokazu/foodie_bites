@@ -12,10 +12,14 @@ function ProfilePage() {
     <div className="max-w-6xl mx-5 p-10 xl:mx:auto">
       <div className = "grid grid-cols-4 gap-4">
         {/* Header for Profile */}
-        <div className="col-span-4">LUKE DRISCOLL</div>
+        <div className="col-span-4">
+          <div className="text-gray-700 text-2xl mr-4">
+            LUKE DRISCOLL
+          </div>
+        </div>
         <div className="avatar">
-          <div classname = "rounded-full w-36 h-36">
-            <Image src={profilePic}/>
+          <div className="w-48 h-48 rounded-full overflow-hidden">
+            <Image className="object-cover w-full h-full" src={profilePic}/>
           </div>
         </div>
       </div>
