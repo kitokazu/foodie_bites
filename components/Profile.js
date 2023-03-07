@@ -31,7 +31,7 @@ function ProfilePage() {
                 Active Buyer
               </div>
               <div className="mt-4">
-                Posts: <span className="font-semibold ml-1">0</span>
+                Purchases: <span className="font-semibold ml-1">0</span>
               </div>
           
             </div>
@@ -47,8 +47,8 @@ function ProfilePage() {
             </div>
             <hr className="border-gray-500 mt-6"></hr>
             <div className="flex justify-center gap-10">
-              <button className="border-gray-800">POSTS</button>
-              <button className="border-gray-800">LIKED</button>
+              <button className="border-gray-800">PURCHASES</button>
+              <button className="border-gray-800">SAVED</button>
             </div>
           </div>
 
