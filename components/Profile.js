@@ -17,9 +17,9 @@ function ProfilePage() {
 
   return (
     <div className="max-w-6xl mx-5 p-10 xl:mx:auto ">
-      <div className = "grid grid-cols-4 gap-4">
-        {/* Header for Profile */}
-        <div className="avatar justify-center">
+      <div className = "grid grid-cols-4 gap-4 shadow">
+        {/* Sidebar for Profile */}
+        <div className="avatar justify-center shadow">
           <div className="w-48 h-48 rounded-full overflow-hidden">
             <Image className="object-cover w-full h-full" width={64} height={64} src={session ? session.user.image : profilePic}/>
           </div>
@@ -37,10 +37,26 @@ function ProfilePage() {
             </div>
          </div>
         </div>
+
+        {/* About Section */}
         <div>
-          <span className="text-gray-700 text-2xl mr-4 font-semibold">About Me:</span>
-          <div className="mt-4">
-            Hey guys 
+          <div className="shadow">
+            <span className="text-gray-700 text-2xl mr-4 font-semibold">About Me:</span>
+            <div className="mt-4">
+              Hey guys 
+            </div>
+            <hr className="border-gray-500 mt-6"></hr>
+            <div className="flex justify-center gap-10">
+              <button className="border-gray-800">POSTS</button>
+              <button className="border-gray-800">LIKED</button>
+            </div>
+          </div>
+
+          {/* Posts Section */}
+          <div className="grid gap-4 shadow">
+            <Image src={profilePic}/>
+            <Image src={profilePic}/>
+            <Image src={profilePic}/>
           </div>
         </div>
         
