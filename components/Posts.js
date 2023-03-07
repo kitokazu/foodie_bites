@@ -1,32 +1,32 @@
 import Post from "./Post"
 
-const DUMMY_DATA = [
+const posts = [
     {
         id: '123',
         username: 'rrezvani01',
-        userImg: 'https://www.google.com/search?q=romtin+rezvani&rlz=1C5CHFA_enUS964US964&source=lnms&tbm=isch&sa=X&ved=2ahUKEwiZo6DbiLf9AhVJEUQIHThACM4Q0pQJegQIAxAC&biw=1440&bih=789&dpr=2#imgrc=CwijfdhBw_eywM',
-        img: 'https://www.google.com/search?q=romtin+rezvani&rlz=1C5CHFA_enUS964US964&source=lnms&tbm=isch&sa=X&ved=2ahUKEwiZo6DbiLf9AhVJEUQIHThACM4Q0pQJegQIAxAC&biw=1440&bih=789&dpr=2#imgrc=CwijfdhBw_eywM',
+        userImg: 'https://fastly.picsum.photos/id/11/2500/1667.jpg?hmac=xxjFJtAPgshYkysU_aqx2sZir-kIOjNR9vx0te7GycQ',
+        img: 'https://fastly.picsum.photos/id/11/2500/1667.jpg?hmac=xxjFJtAPgshYkysU_aqx2sZir-kIOjNR9vx0te7GycQ',
         caption: 'This is dope'
     },
     {
         id: '456',
         username: 'kitokazu',
-        userImg: 'https://www.google.com/search?q=whales&rlz=1C5CHFA_enUS964US964&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjt04yRibf9AhXoPEQIHTBMB7UQ0pQJegQIBhAC&biw=1440&bih=789&dpr=2#imgrc=L56WehN70Jl7BM',
-        img: 'https://www.google.com/search?q=whales&rlz=1C5CHFA_enUS964US964&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjt04yRibf9AhXoPEQIHTBMB7UQ0pQJegQIBhAC&biw=1440&bih=789&dpr=2#imgrc=L56WehN70Jl7BM',
+        userImg: 'https://fastly.picsum.photos/id/15/2500/1667.jpg?hmac=Lv03D1Y3AsZ9L2tMMC1KQZekBVaQSDc1waqJ54IHvo4',
+        img: 'https://fastly.picsum.photos/id/15/2500/1667.jpg?hmac=Lv03D1Y3AsZ9L2tMMC1KQZekBVaQSDc1waqJ54IHvo4',
         caption: 'How interesting'
     },
     {
         id: '789',
         username: 'cattleLover123',
-        userImg: 'https://www.google.com/search?q=cattle&tbm=isch&ved=2ahUKEwj-7IqSibf9AhXIOEQIHVR7BGkQ2-cCegQIABAA&oq=cattle&gs_lcp=CgNpbWcQAzIKCAAQgAQQsQMQCjIKCAAQgAQQsQMQCjIKCAAQgAQQsQMQCjIHCAAQgAQQCjIKCAAQgAQQsQMQCjIHCAAQgAQQCjIKCAAQgAQQsQMQCjIKCAAQgAQQsQMQCjIHCAAQgAQQCjIHCAAQgAQQCjoHCAAQsQMQQzoICAAQgAQQsQM6BQgAEIAEOgQIABBDOgsIABCABBCxAxCDAToECAAQA1CeA1j-BmDeB2gAcAB4AIABbogBwgOSAQM2LjGYAQCgAQGqAQtnd3Mtd2l6LWltZ8ABAQ&sclient=img&ei=uFn9Y_6wC8jxkPIP1PaRyAY&bih=789&biw=1440&rlz=1C5CHFA_enUS964US964#imgrc=bfA08OHLCUGwiM',
-        img: 'https://www.google.com/search?q=cattle&tbm=isch&ved=2ahUKEwj-7IqSibf9AhXIOEQIHVR7BGkQ2-cCegQIABAA&oq=cattle&gs_lcp=CgNpbWcQAzIKCAAQgAQQsQMQCjIKCAAQgAQQsQMQCjIKCAAQgAQQsQMQCjIHCAAQgAQQCjIKCAAQgAQQsQMQCjIHCAAQgAQQCjIKCAAQgAQQsQMQCjIKCAAQgAQQsQMQCjIHCAAQgAQQCjIHCAAQgAQQCjoHCAAQsQMQQzoICAAQgAQQsQM6BQgAEIAEOgQIABBDOgsIABCABBCxAxCDAToECAAQA1CeA1j-BmDeB2gAcAB4AIABbogBwgOSAQM2LjGYAQCgAQGqAQtnd3Mtd2l6LWltZ8ABAQ&sclient=img&ei=uFn9Y_6wC8jxkPIP1PaRyAY&bih=789&biw=1440&rlz=1C5CHFA_enUS964US964#imgrc=bfA08OHLCUGwiM',
+        userImg: 'https://fastly.picsum.photos/id/22/4434/3729.jpg?hmac=fjZdkSMZJNFgsoDh8Qo5zdA_nSGUAWvKLyyqmEt2xs0',
+        img: 'https://fastly.picsum.photos/id/22/4434/3729.jpg?hmac=fjZdkSMZJNFgsoDh8Qo5zdA_nSGUAWvKLyyqmEt2xs0',
         caption: 'What an awesome day'
     },
     {
         id: '101112',
         username: 'warriorsLover123',
-        userImg: 'https://www.google.com/search?q=warriors&rlz=1C5CHFA_enUS964US964&source=lnms&tbm=isch&sa=X&ved=2ahUKEwie2cW9ibf9AhWOE0QIHRsmD7AQ0pQJegQIBRAE&biw=1440&bih=789&dpr=2#imgrc=cfvM0iechpUdIM',
-        img: 'https://www.google.com/search?q=warriors&rlz=1C5CHFA_enUS964US964&source=lnms&tbm=isch&sa=X&ved=2ahUKEwie2cW9ibf9AhWOE0QIHRsmD7AQ0pQJegQIBRAE&biw=1440&bih=789&dpr=2#imgrc=cfvM0iechpUdIM',
+        userImg: 'https://fastly.picsum.photos/id/1/5000/3333.jpg?hmac=Asv2DU3rA_5D1xSe22xZK47WEAN0wjWeFOhzd13ujW4',
+        img: 'https://fastly.picsum.photos/id/1/5000/3333.jpg?hmac=Asv2DU3rA_5D1xSe22xZK47WEAN0wjWeFOhzd13ujW4',
         caption: 'Coolio'
     },
 ]
@@ -34,12 +34,16 @@ const DUMMY_DATA = [
 function Posts() {
     return (
         <div>
-            <Post/>
-            {/* Post */ }
-            {/* Post */ }
-            {/* Post */ }
-            {/* Post */ }
-            {/* Post */ }
+            {posts.map(post => (
+                <Post 
+                    key={post.id} 
+                    id={post.id}
+                    username={post.username}
+                    userImg={post.userImg}
+                    img={post.img}
+                    caption={post.caption}
+                />
+            ))}
         </div>
     )
 }
