@@ -1,22 +1,28 @@
 import { getProviders, signIn as SignIntoProvider} from "next-auth/react";
-
+import Header from "../../components/Header";
 function signIn({ providers }) {
   return (
-    <div>
-      <div className="py-8 px-8 max-w-sm mx-auto bg-white rounded-xl shadow-lg space-y-2 flex h-screen items-center justify-center">
-      {Object.values(providers).map((provider) => (
-        <div className="text-center space-y-2 flex flex-col" key={provider.name}>
-            <button className="signIn">
-                Create Account
-            </button>
-            <button className="signIn mt-10" onClick={() => SignIntoProvider(provider.id)}>
-                Sign in with {provider.name}
-            </button>
+    <>
+    <Header/> 
+
+    <div className="flex flex-col items-center
+                justify-center min-h-screen py-2 
+                -mt-56 px-14 text-center">
+        <img className="w-80" src="https://links.papareact.com/ocw"/>
+        <div className="mt-40">
+        {Object.values(providers).map((provider) => (
+            <div key={provider.name}>
+                <button 
+                    className='p-3 bg-blue-500 rounded-lg text-white'
+                    onClick={() => SignIntoProvider(provider.id)}>
+                    Sign in with {provider.name}
+                </button>
+            </div>
+        ))} 
         </div>
-      ))} 
-      </div>
     </div>
-  )
+    </>
+  );
 }
 
 export async function getServerSideProps() {
@@ -25,8 +31,8 @@ export async function getServerSideProps() {
     return {
         props: {
             providers
-        }
-    }
+        },
+    };
 }
 
-export default signIn
+export default signIn;

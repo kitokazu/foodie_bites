@@ -11,8 +11,12 @@ import {
 } from "@heroicons/react/24/outline";
 
 import { useRouter } from 'next/router'
+import { signIn, signOut, useSession } from "next-auth/react";
 
 function Header() {
+  const {data: session } = useSession();
+
+  console.log(session);
   const router = useRouter();
 
   const routeAddNums = e => {
@@ -65,17 +69,30 @@ function Header() {
         <div className="flex dark:text-black items-center justify-end space-x-4">
           <HomeIcon className="navBtn" onClick={routeHomePage}/>
           <UserCircleIcon className="navBtn" onClick={routeProfilePage}/>
-          <div className="relative navBtn">
-            <EnvelopeIcon className="navBtn" onClick={routeAddNums}/>
-            <div className="absolute -top-2 -right-2 text-s w-5 h-5 bg-red-500 rounded-full flex items-center justify-center animate-pulse text-white">3</div>
-          </div>
-          <div className="relative navBtn">
-            <ShoppingCartIcon className="navBtn" onClick={routeAddNums}/>
-            <div className="absolute -top-2 -right-2 text-s w-5 h-5 bg-red-500 rounded-full flex items-center justify-center animate-pulse text-white">1</div>
-          </div>
-          <Bars3Icon className="h-6 md:hidden cursor-pointer"/>
-        </div>
 
+          {session ? (
+            <>
+             <div className="relative navBtn">
+             <EnvelopeIcon className="navBtn" onClick={routeAddNums}/>
+             <div className="absolute -top-2 -right-2 text-s w-5 h-5 bg-red-500 rounded-full flex items-center justify-center animate-pulse text-white">3</div>
+           </div>
+           <div className="relative navBtn">
+             <ShoppingCartIcon className="navBtn" onClick={routeAddNums}/>
+             <div className="absolute -top-2 -right-2 text-s w-5 h-5 bg-red-500 rounded-full flex items-center justify-center animate-pulse text-white">1</div>
+           </div>
+           <Bars3Icon className="h-6 md:hidden cursor-pointer"/>
+           <img
+             onClick={signOut}
+             src={session.user.image}
+             alt="profile pic"
+             className="h-10 w-10 rounded-full cursor-pointer"
+           />
+          </>
+          ): (
+            <button onClick={signIn}>Sign In</button>
+          )}
+         
+         </div>
       </div>
     </div>
   );
