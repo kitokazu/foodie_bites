@@ -81,11 +81,13 @@ function Header() {
              <div className="absolute -top-2 -right-2 text-s w-5 h-5 bg-red-500 rounded-full flex items-center justify-center animate-pulse text-white">1</div>
            </div>
            <Bars3Icon className="h-6 md:hidden cursor-pointer"/>
-           <img
+           <Image
              onClick={signOut}
              src={session.user.image}
              alt="profile pic"
-             className="h-10 w-10 rounded-full cursor-pointer"
+             className="rounded-full cursor-pointer"
+             width={40}
+             height={40}
            />
           </>
           ): (
