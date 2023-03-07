@@ -37,16 +37,15 @@ function Menu() {
   return ( 
     <div className="h-screen flex items-center ">
       <div className= "text-6xl font-serif text-stone-600 ml-60 hover:text-opacity-50">
-      <motion.h1
-        initial={{ x: -1000 }}
-        animate={{ x: 0 }}
-        transition={{ duration: 1 }}
-      >
+        <motion.div
+          initial={{ opacity: 0, x: -1000 }}
+          animate={{ opacity: 1, x: 0}}
+          transition={{ duration: 1 }}>
           <a className="menuItem" href = "/auth/signin">SIGN IN</a>
           <a className="menuItem" href = "/">HOME</a>
           <a className="menuItem" href = "/">SHOP</a>
           <a className="menuItem" onClick={routeProfilePage}>PROFILE</a>
-        </motion.h1>
+        </motion.div>
       </div>
     
       <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-indigo-500 radial bg-left-top bg-cover relative"></div>

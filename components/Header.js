@@ -13,6 +13,8 @@ import {
 import { useRouter } from 'next/router'
 import { signIn, signOut, useSession } from "next-auth/react";
 
+import { motion } from "framer-motion";
+
 function Header() {
   const {data: session } = useSession();
 
@@ -67,34 +69,34 @@ function Header() {
 
         {/* Right Side */}
         <div className="flex dark:text-black items-center justify-end space-x-4">
-          <HomeIcon className="navBtn" onClick={routeHomePage}/>
-          <UserCircleIcon className="navBtn" onClick={routeProfilePage}/>
+            <HomeIcon className="navBtn" onClick={routeHomePage}/>
+            <UserCircleIcon className="navBtn" onClick={routeProfilePage}/>
 
-          {session ? (
-            <>
-             <div className="relative navBtn">
-             <EnvelopeIcon className="navBtn" onClick={routeAddNums}/>
-             <div className="absolute -top-2 -right-2 text-s w-5 h-5 bg-red-500 rounded-full flex items-center justify-center animate-pulse text-white">3</div>
-           </div>
-           <div className="relative navBtn">
-             <ShoppingCartIcon className="navBtn" onClick={routeAddNums}/>
-             <div className="absolute -top-2 -right-2 text-s w-5 h-5 bg-red-500 rounded-full flex items-center justify-center animate-pulse text-white">1</div>
-           </div>
-           <Bars3Icon className="h-6 md:hidden cursor-pointer"/>
-           <Image
-             onClick={signOut}
-             src={session.user.image}
-             alt="profile pic"
-             className="rounded-full cursor-pointer"
-             width={40}
-             height={40}
-           />
-          </>
-          ): (
-            <button onClick={signIn}>Sign In</button>
-          )}
-         
+            {session ? (
+              <>
+              <div className="relative navBtn">
+              <EnvelopeIcon className="navBtn" onClick={routeAddNums}/>
+              <div className="absolute -top-2 -right-2 text-s w-5 h-5 bg-red-500 rounded-full flex items-center justify-center animate-pulse text-white">3</div>
+            </div>
+            <div className="relative navBtn">
+              <ShoppingCartIcon className="navBtn" onClick={routeAddNums}/>
+              <div className="absolute -top-2 -right-2 text-s w-5 h-5 bg-red-500 rounded-full flex items-center justify-center animate-pulse text-white">1</div>
+            </div>
+            <Bars3Icon className="h-6 md:hidden cursor-pointer"/>
+            <Image
+              onClick={signOut}
+              src={session.user.image}
+              alt="profile pic"
+              className="rounded-full cursor-pointer"
+              width={40}
+              height={40}
+            />
+            </>
+            ): (
+              <button onClick={signIn}>Sign In</button>
+            )}
          </div>
+              
       </div>
     </div>
   );
