@@ -37,6 +37,12 @@ function ProfilePage() {
             </div>
          </div>
         </div>
+        <div>
+          <span className="text-gray-700 text-2xl mr-4 font-semibold">About Me:</span>
+          <div className="mt-4">
+            Hey guys 
+          </div>
+        </div>
         
       </div>
     </div>
