@@ -13,8 +13,6 @@ import {
 import { useRouter } from 'next/router'
 import { signIn, signOut, useSession } from "next-auth/react";
 
-import { motion } from "framer-motion";
-
 function Header() {
   const {data: session } = useSession();
 

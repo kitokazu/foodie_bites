@@ -1,7 +1,6 @@
 import Image from "next/image";
 import {
 } from "@heroicons/react/24/outline";
-import McDonalds_Logo from '../images/mcdonalds_logo.png';
 import profilePic from '../images/headshot.jpeg';
 
 import { useRouter } from 'next/router'

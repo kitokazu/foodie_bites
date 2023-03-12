@@ -31,18 +31,18 @@ function Menu() {
 
   const routeHomePage = e => {
     e.preventDefault()
-    router.push('/')
+    router.push('/homePage')
   };
 
   return ( 
-    <div className="h-screen flex items-center ">
+    <div className="h-screen flex items-center bg-gray-50 h-screen">
       <div className= "text-6xl font-serif text-stone-600 ml-60 hover:text-opacity-50">
         <motion.div
           initial={{ opacity: 0, x: -1000 }}
           animate={{ opacity: 1, x: 0}}
           transition={{ duration: 1 }}>
           <a className="menuItem" href = "/auth/signin">SIGN IN</a>
-          <a className="menuItem" href = "/">HOME</a>
+          <a className="menuItem" onClick={routeHomePage}>HOME</a>
           <a className="menuItem" href = "/">SHOP</a>
           <a className="menuItem" onClick={routeProfilePage}>PROFILE</a>
         </motion.div>
