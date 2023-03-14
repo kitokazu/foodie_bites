@@ -35,7 +35,7 @@ function Menu() {
   };
 
   return ( 
-    <div className="h-screen flex items-center bg-gray-50">
+    <div className="h-screen flex items-center bg-gray-50 h-screen">
       <div className= "text-6xl font-serif text-stone-600 ml-60 hover:text-opacity-50">
         <motion.div
           initial={{ opacity: 0, x: -1000 }}
