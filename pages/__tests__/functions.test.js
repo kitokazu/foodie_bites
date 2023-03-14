@@ -1,9 +1,5 @@
 import React from 'react';
 import { sum } from '../math.utils';
-import { getServerSideProps } from '../auth/signin';
-// import { getProviders, signIn } from 'next-auth/react';
-import { render, screen } from '@testing-library/react';
-import "@testing-library/jest-dom";
 
 // Adding numbers test function
 describe('sum module', () => {
