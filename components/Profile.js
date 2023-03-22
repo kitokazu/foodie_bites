@@ -8,6 +8,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import {
   Cog6ToothIcon,
 } from "@heroicons/react/24/outline";
+import ProfileSidebar from "./ProfileSidebar";
 
 
 
@@ -17,6 +18,7 @@ function ProfilePage() {
   return (
     <div className="max-w-6xl mx-5 p-10 xl:mx:auto ">
       <div className = "grid grid-cols-4 gap-4 shadow">
+
         {/* Sidebar for Profile */}
         <div className="avatar justify-center shadow">
           <div className="w-48 h-48 rounded-full overflow-hidden">
@@ -53,7 +55,12 @@ function ProfilePage() {
 
           {/* Posts Section */}
           <div className="grid gap-4 shadow">
-            <Image src={profilePic}/>
+            <div className=" gap-4 flex">
+              <Image className="w-96 h-96" src={profilePic}/>
+              <Image src={profilePic}/>
+              <Image src={profilePic}/>
+            </div>
+            
             <Image src={profilePic}/>
             <Image src={profilePic}/>
           </div>
