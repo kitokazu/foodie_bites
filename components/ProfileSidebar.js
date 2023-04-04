@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Cog6ToothIcon } from "@heroicons/react/24/outline";
-import profilePic from "../images/headshot.jpeg";
+import profilePic from "../images/profile.png";
 import { useRouter } from "next/router";
 import { signIn, signOut, useSession } from "next-auth/react";
 
