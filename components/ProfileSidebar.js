@@ -26,7 +26,7 @@ function ProfileSidebar() {
           <div className="mt-1 flex flex-col">
             <div className="text-yellow-600">Active Foodie</div>
             <div className="mt-4">
-              Reviews: <span className="font-semibold ml-1">0</span>
+              Reviews: <span className="font-semibold ml-1">4</span>
             </div>
             <div className="mt-4">
               Favorite Places: <span className="font-semibold ml-1">Canes</span>
