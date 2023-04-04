@@ -8,46 +8,41 @@ import shoes from "../images/shoes.jpeg";
 import pants from "../images/pants.jpeg";
 import hat from "../images/hat.jpeg";
 
+import bruxies from "../images/bruxies.jpeg";
+import thaiTowne from "../images/thai-towne.jpeg";
+import pizzaPress from "../images/pizza-press.jpeg";
+import philz from "../images/philz.jpeg";
+
+import { EllipsisHorizontalIcon } from "@heroicons/react/24/solid";
+
 export default function ProfileSidebar() {
   const { data: session } = useSession();
 
-  const posts = [
-    {
-      img: "https://fastly.picsum.photos/id/11/2500/1667.jpg?hmac=xxjFJtAPgshYkysU_aqx2sZir-kIOjNR9vx0te7GycQ",
-    },
-    {
-      img: "https://fastly.picsum.photos/id/15/2500/1667.jpg?hmac=Lv03D1Y3AsZ9L2tMMC1KQZekBVaQSDc1waqJ54IHvo4",
-    },
-    {
-      img: "https://fastly.picsum.photos/id/22/4434/3729.jpg?hmac=fjZdkSMZJNFgsoDh8Qo5zdA_nSGUAWvKLyyqmEt2xs0",
-    },
-    {
-      img: "https://fastly.picsum.photos/id/1/5000/3333.jpg?hmac=Asv2DU3rA_5D1xSe22xZK47WEAN0wjWeFOhzd13ujW4",
-    },
-  ];
-
   const photos = [
-    { id: 1, src: shoes, title: "Shoes" },
-    { id: 2, src: shirt, title: "Shirt" },
-    { id: 3, src: hat, title: "Hat" },
-    { id: 4, src: pants, title: "Pants" },
+    { id: 1, src: thaiTowne, title: "Thai Towne" },
+    { id: 2, src: bruxies, title: "Bruxies" },
+    { id: 3, src: philz, title: "Philz Coffee" },
+    { id: 4, src: pizzaPress, title: "Pizza Press" },
     // Add more photos here
   ];
 
   return (
-    <div className="flex flex-wrap items-center justify-center h-full w-3/4 mt-5 gap-10">
+    <>
       {photos.map((photo) => (
         <div key={photo.id} className="relative m-2 w-1/3 h-72 shadow">
+          {/* Header */}
+          <div className="flex items-center p-5 shadow">
+            <p className="cursor-pointer font-bold">{photo.title}</p>
+          </div>
+
+          {/* Image */}
           <Image
             src={photo.src}
             alt={`Photo ${photo.id}`}
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-black bg-opacity-50 text-white flex items-center justify-center opacity-0 transition-opacity duration-300 hover:opacity-100">
-            {photo.title}
-          </div>
         </div>
       ))}
-    </div>
+    </>
   );
 }

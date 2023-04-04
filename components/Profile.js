@@ -17,7 +17,9 @@ function ProfilePage() {
   return (
     <div class="flex">
       <ProfileSidebar />
-      <ProfilePost />
+      <div className="flex flex-wrap items-center justify-center h-full w-3/4 mt-5 gap-20">
+        <ProfilePost />
+      </div>
     </div>
   );
 }
