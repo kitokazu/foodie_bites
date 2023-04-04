@@ -29,17 +29,22 @@ export default function ProfileSidebar() {
   return (
     <>
       {photos.map((photo) => (
-        <div key={photo.id} className="relative m-2 w-1/3 h-72 shadow">
+        <div
+          key={photo.id}
+          className="relative m-2 w-1/3 h-96 shadow border-solid border-2 overflow-hidden"
+        >
           {/* Header */}
-          <div className="flex items-center p-5 shadow">
+          <div className="flex items-center p-5">
             <p className="cursor-pointer font-bold">{photo.title}</p>
           </div>
+
+          {/* <p className="">{"04/01/2023"}</p> */}
 
           {/* Image */}
           <Image
             src={photo.src}
             alt={`Photo ${photo.id}`}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover cursor-pointer"
           />
         </div>
       ))}
