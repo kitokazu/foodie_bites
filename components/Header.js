@@ -82,7 +82,6 @@ function Header() {
         {/* Right Side */}
         <div className="flex dark:text-black items-center justify-end space-x-4">
           <HomeIcon className="navBtn" onClick={routeHomePage} />
-          <UserCircleIcon className="navBtn" onClick={routeProfilePage} />
 
           {session ? (
             <>
@@ -100,13 +99,19 @@ function Header() {
               </div>
               <Bars3Icon className="h-6 md:hidden cursor-pointer" />
               <Image
-                onClick={signOut}
+                onClick={routeProfilePage}
                 src={session.user.image}
                 alt="profile pic"
                 className="rounded-full cursor-pointer"
                 width={40}
                 height={40}
               />
+              <button
+                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                onClick={signOut}
+              >
+                Sign Out
+              </button>
             </>
           ) : (
             <button onClick={signIn}>Sign In</button>
