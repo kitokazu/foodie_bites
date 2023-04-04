@@ -53,13 +53,13 @@ function Header() {
             style={{objectFit: "contain"}}
             /> */}
             <div className="text-3xl font-serif text-stone-600 mt-5 ml-5">
-              STYLESHARE
+              FoodieBites
             </div>
         </div>
 
         <div className="relative w-24 h-24 lg:hidden flex-shrink-0 cursor-pointer">
             <div className="text-3xl font-serif text-stone-600 mt-5 ml-5">
-              SS
+              FB
             </div>
         </div>
 

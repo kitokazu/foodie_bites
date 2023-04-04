@@ -9,7 +9,7 @@ function signIn({ providers }) {
                 justify-center min-h-screen py-2 
                 -mt-56 px-14 text-center">
         <div className="text-3xl font-serif text-stone-600 mt-5 ml-5">
-          STYLESHARE
+          FoodieBites
         </div>
         <div className="mt-40">
         {Object.values(providers).map((provider) => (
