@@ -4,10 +4,26 @@ import {
   HeartIcon,
   BookmarkSquareIcon,
   ChatBubbleBottomCenterTextIcon,
-  PaperAirplaneIcon,
+  BuildingStorefrontIcon,
 } from "@heroicons/react/24/outline";
 
 function Post({ id, username, userImg, img, caption }) {
+
+  const apiKey = process.env.GOOGLE_PLACES_API_KEY;
+  const radius = 1000; // Radius of the search area in meters
+  const type = 'restaurant'; // Type of place to search for  
+
+  const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${apiKey}&location=-33.8670522,151.1957362&radius=${radius}&type=${type}`;
+
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      console.log();
+    })
+    .catch(error => {
+      console.error(error);
+    });
+
   return (
     <div
       className="bg-white my-7 border
@@ -32,10 +48,10 @@ function Post({ id, username, userImg, img, caption }) {
         <div className="flex space-x-4">
           <HeartIcon className="btn" />
           <ChatBubbleBottomCenterTextIcon className="btn" />
-          <PaperAirplaneIcon className="btn" />
         </div>
 
-        <BookmarkSquareIcon className="btn" />
+        <BuildingStorefrontIcon className="btn" />
+        <p></p>
       </div>
       {/* Caption */}
       {/* Comments */}
