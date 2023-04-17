@@ -19,38 +19,13 @@ function Header() {
   console.log(session);
   const router = useRouter();
 
-  const routeAddNums = (e) => {
-    e.preventDefault();
-    router.push("/addNums");
-  };
-
-  const routeProfilePage = (e) => {
-    e.preventDefault();
-    router.push("/profilePage");
-  };
-
-  const routeLandingPage = (e) => {
-    e.preventDefault();
-    router.push("/");
-  };
-
-  const routeHomePage = (e) => {
-    e.preventDefault();
-    router.push("/homePage");
-  };
-
-  const messagePage = (e) => {
-    e.preventDefault();
-    router.push("/messagePage");
-  };
-
   return (
     <div className="shadow-sm border-b bg-white sticky top-0 z-50">
       <div className="flex justify-between bg-white max-w-6xl mx-5 xl:mx-auto">
         {/* Left Side */}
         <div
           className="relative hidden lg:inline w-36 h-12 cursor-pointer"
-          onClick={routeLandingPage}
+          onClick={() => router.push("/")}
         >
           {/* <Image 
             src={McDonalds_Long}
@@ -81,25 +56,25 @@ function Header() {
 
         {/* Right Side */}
         <div className="flex dark:text-black items-center justify-end space-x-4">
-          <HomeIcon className="navBtn" onClick={routeHomePage} />
+          <HomeIcon
+            className="navBtn"
+            onClick={() => router.push("/homePage")}
+          />
 
           {session ? (
             <>
               <div className="relative navBtn">
-                <EnvelopeIcon className="navBtn" onClick={messagePage} />
+                <EnvelopeIcon
+                  className="navBtn"
+                  onClick={() => router.push("/messagePage")}
+                />
                 <div className="absolute -top-2 -right-2 text-s w-5 h-5 bg-red-500 rounded-full flex items-center justify-center animate-pulse text-white">
                   3
                 </div>
               </div>
-              <div className="relative navBtn">
-                <ShoppingCartIcon className="navBtn" onClick={routeAddNums} />
-                <div className="absolute -top-2 -right-2 text-s w-5 h-5 bg-red-500 rounded-full flex items-center justify-center animate-pulse text-white">
-                  1
-                </div>
-              </div>
               <Bars3Icon className="h-6 md:hidden cursor-pointer" />
               <Image
-                onClick={routeProfilePage}
+                onClick={() => router.push("/profilePage")}
                 src={session.user.image}
                 alt="profile pic"
                 className="rounded-full cursor-pointer"

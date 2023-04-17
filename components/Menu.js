@@ -14,31 +14,12 @@ import { useRouter } from "next/router";
 import LoginModal from "./LoginModal";
 import { motion } from "framer-motion";
 import { signIn, signOut, useSession } from "next-auth/react";
+import CreatePostModal from "./CreatePostModal";
 
 function Menu() {
   const isSignedIn = true;
   const router = useRouter();
   const { data: session } = useSession();
-
-  const routeAddNums = (e) => {
-    e.preventDefault();
-    router.push("/addNums");
-  };
-
-  const routeProfilePage = (e) => {
-    e.preventDefault();
-    router.push("/profilePage");
-  };
-
-  const routeHomePage = (e) => {
-    e.preventDefault();
-    router.push("/homePage");
-  };
-
-  const messagePage = (e) => {
-    e.preventDefault();
-    router.push("/messagePage");
-  };
 
   return (
     <div className="h-screen flex items-center bg-gray-50">
@@ -51,14 +32,26 @@ function Menu() {
           {session ? (
             <>
               <>
-                <a className="menuItem" onClick={routeHomePage}>
+                <a
+                  className="menuItem"
+                  onClick={() => router.push("/homePage")}
+                >
                   FEED
                 </a>
-                <a className="menuItem" onClick={routeProfilePage}>
+                <a
+                  className="menuItem"
+                  onClick={() => router.push("/profilePage")}
+                >
                   PROFILE
                 </a>
-                <a className="menuItem" onClick={messagePage}>
+                <a
+                  className="menuItem"
+                  onClick={() => router.push("/messagePage")}
+                >
                   MESSAGES
+                </a>
+                <a className="menuItem" onClick={"/"}>
+                  CREATE POST
                 </a>
               </>
             </>
