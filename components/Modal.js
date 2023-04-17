@@ -2,7 +2,7 @@ import React from "react";
 import { useRecoilState } from "recoil";
 import { modalState } from "../atoms/modalAtom";
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useState } from "react";
+import { Fragment, useState, useRef } from "react";
 import { CameraIcon } from "@heroicons/react/24/outline";
 
 function Modal() {
@@ -11,6 +11,29 @@ function Modal() {
   const handleRatingChange = (event) => {
     setRating(parseFloat(event.target.value));
   };
+
+  // useRef hook for file picking
+  const filePickerRef = useRef();
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  // function for handling the file
+  const addImageToPost = (e) => {
+    const reader = new FileReader();
+    if (e.target.files[0]) {
+      reader.readAsDataURL(e.target.files[0]);
+    }
+
+    reader.onload = (readerEvent) => {
+      setSelectedFile(readerEvent.target.result);
+    };
+  };
+
+  // References for the input fields
+  const restaurantRef = useRef(null);
+  const locationRef = useRef(null);
+  const linkRef = useRef(null);
+  const ratingRef = useRef(null);
+  const reviewRef = useRef(null);
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -61,6 +84,7 @@ function Modal() {
                       <input
                         className="border ml-2 focus:ring-0 w-full"
                         type="text"
+                        ref={restaurantRef}
                       />
                     </div>
                     {/* Location */}
@@ -69,6 +93,7 @@ function Modal() {
                       <input
                         className="border ml-2 focus:ring-0 w-full"
                         type="text"
+                        ref={locationRef}
                       />
                     </div>
                     {/* Link */}
@@ -77,6 +102,7 @@ function Modal() {
                       <input
                         className="border ml-2 focus:ring-0 w-full"
                         type="text"
+                        ref={linkRef}
                       />
                     </div>
                     {/* Rating */}
@@ -86,6 +112,7 @@ function Modal() {
                         className="ml-2 py-2 px-4 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                         value={rating}
                         onChange={handleRatingChange}
+                        ref={ratingRef}
                       >
                         <option value={0}>0</option>
                         <option value={0.5}>0.5</option>
@@ -107,6 +134,7 @@ function Modal() {
                         className="border ml-2 focus:ring-0 w-full"
                         type="text"
                         rows="4"
+                        ref={reviewRef}
                       />
                     </div>
 
@@ -114,18 +142,30 @@ function Modal() {
                     <Dialog.Title as="h3" className="mt-5 leading-6">
                       Upload Picture:
                     </Dialog.Title>
-                    <div
-                      // onClick={() => filePickerRef.current.click()}
-                      className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100 cursor-pointer"
-                    >
-                      <CameraIcon className="h-6 w-6 text-red-600" />
-                    </div>
+
+                    {/* If a picture is not selected then render the camera icon */}
+                    {selectedFile ? (
+                      <img
+                        src={selectedFile}
+                        className="w-full object-contain cursor-pointer"
+                        onClick={() => setSelectedFile(null)}
+                        alt=""
+                      />
+                    ) : (
+                      <div
+                        onClick={() => filePickerRef.current.click()}
+                        className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100 cursor-pointer"
+                      >
+                        <CameraIcon className="h-6 w-6 text-red-600" />
+                      </div>
+                    )}
+
                     <div>
                       <input
-                        // ref={filePickerRef}
+                        ref={filePickerRef}
                         type="file"
                         hidden
-                        // onChange={addImageToPost}
+                        onChange={addImageToPost}
                       />
                     </div>
                   </div>
