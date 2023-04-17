@@ -14,7 +14,6 @@ import { useRouter } from "next/router";
 import LoginModal from "./LoginModal";
 import { motion } from "framer-motion";
 import { signIn, signOut, useSession } from "next-auth/react";
-import CreatePostModal from "./CreatePostModal";
 
 function Menu() {
   const isSignedIn = true;

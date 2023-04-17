@@ -8,13 +8,22 @@ import {
   Bars3Icon,
   EnvelopeIcon,
   ShoppingCartIcon,
+  PlusCircleIcon,
 } from "@heroicons/react/24/outline";
 
 import { useRouter } from "next/router";
 import { signIn, signOut, useSession } from "next-auth/react";
+import { useRecoilState } from "recoil";
+import { modalState } from "../atoms/modalAtom";
 
 function Header() {
   const { data: session } = useSession();
+
+  // Set function
+  const [open, setOpen] = useRecoilState(modalState);
+
+  // // If we want a read only value
+  // const open2 = useRecoilValue(modalState);
 
   console.log(session);
   const router = useRouter();
@@ -27,12 +36,6 @@ function Header() {
           className="relative hidden lg:inline w-36 h-12 cursor-pointer"
           onClick={() => router.push("/")}
         >
-          {/* <Image 
-            src={McDonalds_Long}
-            alt="McDonalds Logo"
-            fill="contain"
-            style={{objectFit: "contain"}}
-            /> */}
           <div className="text-3xl font-serif text-stone-600 mt-5 ml-5">
             FoodieBites
           </div>
@@ -63,6 +66,10 @@ function Header() {
 
           {session ? (
             <>
+              <PlusCircleIcon
+                className="navBtn"
+                onClick={() => setOpen(true)}
+              />
               <div className="relative navBtn">
                 <EnvelopeIcon
                   className="navBtn"
