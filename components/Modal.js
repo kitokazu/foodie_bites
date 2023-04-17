@@ -4,9 +4,26 @@ import { modalState } from "../atoms/modalAtom";
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState, useRef } from "react";
 import { CameraIcon } from "@heroicons/react/24/outline";
+import { db, storage } from "../firebase";
+import {
+  addDoc,
+  collection,
+  doc,
+  serverTimestamp,
+  updateDoc,
+} from "@firebase/firestore";
+import { ref, getDownloadURL, uploadString } from "@firebase/storage";
+
+import { useSession } from "next-auth/react";
 
 function Modal() {
+  // Session Data
+  const { data: session } = useSession();
+
+  // Recoil state for rendering the modal
   const [open, setOpen] = useRecoilState(modalState);
+
+  // state for rating
   const [rating, setRating] = useState(0);
   const handleRatingChange = (event) => {
     setRating(parseFloat(event.target.value));
@@ -34,6 +51,51 @@ function Modal() {
   const linkRef = useRef(null);
   const ratingRef = useRef(null);
   const reviewRef = useRef(null);
+
+  // Function for uploading post
+  const [loading, setLoading] = useState(false);
+  const uploadPost = async () => {
+    if (loading) return;
+
+    setLoading(true);
+
+    // 1) Create a post and add to firestore 'posts' collection
+    // 2) Then get the psot ID for the newly created post
+    // 3) Upload the image to firebase storage with the post ID
+    // 4) Get a download URL from gb storage and update the original post with the image
+
+    // Schema/Doc to be uploaded
+    const docRef = await addDoc(collection(db, "posts"), {
+      username: session.user.username,
+      profileInmg: session.user.image,
+
+      retaurant: restaurantRef.current.value,
+      location: locationRef.current.value,
+      link: linkRef.current.value,
+      rating: ratingRef.current.value,
+      review: reviewRef.current.value,
+
+      //use the servers timezone
+      timestamp: serverTimestamp(),
+    });
+
+    console.log("New doc added with ID", docRef.id);
+
+    const imageRef = ref(storage, `posts/${docRef.id}/image`);
+
+    await uploadString(imageRef, selectedFile, "data_url").then(
+      async (snapshot) => {
+        const downloadURL = await getDownloadURL(imageRef);
+        await updateDoc(doc(db, "posts", docRef.id), {
+          image: downloadURL,
+        });
+      }
+    );
+
+    setOpen(false);
+    setLoading(false);
+    setSelectedFile(null);
+  };
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -175,8 +237,9 @@ function Modal() {
                   <button
                     type="button"
                     className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:text-sm disabled:bg-gray-300 disabled:cursor-not-allowed hover:disabled:bg-gray-300"
+                    onClick={uploadPost}
                   >
-                    Upload Review
+                    {loading ? "Uploading..." : "Upload Review"}
                   </button>
                 </div>
               </div>

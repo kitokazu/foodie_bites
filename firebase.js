@@ -16,13 +16,18 @@ const firebaseConfig = {
   storageBucket: "styleshare-842af.appspot.com",
   messagingSenderId: "940051508309",
   appId: "1:940051508309:web:45fdd8dee872f8f761f8dc",
-  measurementId: "G-BNL7ZXNNNE"
+  measurementId: "G-BNL7ZXNNNE",
 };
 
 // Initialize Firebase
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 const db = getFirestore();
 const storage = getStorage();
-const analytics = getAnalytics(app);
+let analytics;
+
+// Error for the window
+if (app.name && typeof window !== "undefined") {
+  analytics = getAnalytics(app);
+}
 
 export { app, db, storage, analytics };
