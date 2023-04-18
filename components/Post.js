@@ -2,7 +2,7 @@ import { EllipsisHorizontalIcon } from "@heroicons/react/24/solid";
 
 import {
   HeartIcon,
-  BookmarkSquareIcon,
+  FaceSmileIcon,
   ChatBubbleBottomCenterTextIcon,
   BuildingStorefrontIcon,
 } from "@heroicons/react/24/outline";
@@ -26,7 +26,7 @@ function Post({
 
   const newRating = rating + "";
 
-  const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${apiKey}&location=-33.8670522,151.1957362&radius=${radius}&type=${type}`;
+  /*var axios = require('axios');
 
   fetch(url)
     .then((response) => response.json())
@@ -35,7 +35,38 @@ function Post({
     })
     .catch((error) => {
       console.error(error);
+  var config = {
+    method: 'get',
+    url: `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522%2C151.1957362&radius=1500&type=restaurant&keyword=cruise&key=${apiKey}`,
+    headers: { }
+  };
+  
+  axios(config)
+  .then(function (response) {
+    console.log(JSON.stringify(response.data));
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+*/
+
+  /*function getLocation(ip) {
+  const url = `https://geo.ipify.org/api/v2?apiKey=at_etN2Agi7mkKqdjfcDhYLN4UqfKHRf&ipAddress=${ip}`;
+  https.get(url, (res) => {
+    let data = "";
+    res.on("data", (chunk) => {
+      data += chunk;
     });
+    res.on("end", () => {
+      const location = JSON.parse(data);
+      console.log("Latitude:", location.location.lat);
+      console.log("Longitude:", location.location.lng);
+    });
+  });
+}
+
+// Example usage:
+getLocation("123.45.67.89"); // Replace with the user's IP address*/
 
   return (
     <div
@@ -54,7 +85,7 @@ function Post({
       </div>
 
       {/* Image */}
-      <img src={img} alt="" className="object-cover" />
+      <img src={img} alt="" className="object-cover w-full" />
       {/* Buttons */}
       <div className="flex justify-between pt-4 px-4 pb-4">
         <div className="flex space-x-4">
@@ -63,10 +94,18 @@ function Post({
         </div>
 
         <BuildingStorefrontIcon className="btn" />
-        <p></p>
       </div>
       {/* Caption */}
       {/* Comments */}
+      <form className="flex items-center p-4">
+        <FaceSmileIcon className="h-7" />
+        <input
+          type="text"
+          placeholder="Add a comment..."
+          className="border-none flex-1 focus:ring-0 outline-none"
+        />
+        <button className="font-semibold text-blue-400">Post</button>
+      </form>
       {/* Input Box*/}
     </div>
   );
