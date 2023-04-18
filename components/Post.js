@@ -7,20 +7,33 @@ import {
   BuildingStorefrontIcon,
 } from "@heroicons/react/24/outline";
 
-function Post({ id, username, userImg, img, caption }) {
+import StarRating from "./StarRating";
 
+function Post({
+  id,
+  username,
+  userImg,
+  img,
+  restaurant,
+  rating,
+  link,
+  review,
+  date,
+}) {
   const apiKey = process.env.GOOGLE_PLACES_API_KEY;
   const radius = 1000; // Radius of the search area in meters
-  const type = 'restaurant'; // Type of place to search for  
+  const type = "restaurant"; // Type of place to search for
+
+  const newRating = rating + "";
 
   const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${apiKey}&location=-33.8670522,151.1957362&radius=${radius}&type=${type}`;
 
   fetch(url)
-    .then(response => response.json())
-    .then(data => {
+    .then((response) => response.json())
+    .then((data) => {
       console.log();
     })
-    .catch(error => {
+    .catch((error) => {
       console.error(error);
     });
 
@@ -38,7 +51,6 @@ function Post({ id, username, userImg, img, caption }) {
                     border p-1 mr-3"
         />
         <p className="flex-1 font-bold">{username}</p>
-        <EllipsisHorizontalIcon className="h-5" />
       </div>
 
       {/* Image */}

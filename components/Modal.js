@@ -67,7 +67,7 @@ function Modal() {
     // Schema/Doc to be uploaded
     const docRef = await addDoc(collection(db, "posts"), {
       username: session.user.username,
-      profileInmg: session.user.image,
+      profileImg: session.user.image,
 
       retaurant: restaurantRef.current.value,
       location: locationRef.current.value,

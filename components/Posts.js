@@ -56,16 +56,16 @@ function Posts() {
 
   return (
     <div>
-      {/* {posts.map((post) => (
+      {posts.map((post) => (
         <Post
           key={post.id}
           id={post.id}
-          username={post.username}
-          userImg={post.userImg}
-          img={post.img}
-          caption={post.caption}
+          username={post.data().username}
+          userImg={post.data().profileImg}
+          img={post.data().image}
+          caption={post.data().review}
         />
-      ))} */}
+      ))}
     </div>
   );
 }
