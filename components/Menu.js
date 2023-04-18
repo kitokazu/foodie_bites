@@ -14,11 +14,14 @@ import { useRouter } from "next/router";
 import LoginModal from "./LoginModal";
 import { motion } from "framer-motion";
 import { signIn, signOut, useSession } from "next-auth/react";
+import { useRecoilState } from "recoil";
+import { modalState } from "../atoms/modalAtom";
 
 function Menu() {
   const isSignedIn = true;
   const router = useRouter();
   const { data: session } = useSession();
+  const [open, setOpen] = useRecoilState(modalState);
 
   return (
     <div className="h-screen flex items-center bg-gray-50">
@@ -49,7 +52,7 @@ function Menu() {
                 >
                   MESSAGES
                 </a>
-                <a className="menuItem" onClick={"/"}>
+                <a className="menuItem" onClick={() => setOpen(true)}>
                   CREATE POST
                 </a>
               </>
