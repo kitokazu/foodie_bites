@@ -15,6 +15,7 @@ import {
 import { ref, getDownloadURL, uploadString } from "@firebase/storage";
 
 import { useSession } from "next-auth/react";
+import Image from "next/image";
 
 function Modal() {
   // Session Data
@@ -207,8 +208,10 @@ function Modal() {
 
                     {/* If a picture is not selected then render the camera icon */}
                     {selectedFile ? (
-                      <img
+                      <Image
                         src={selectedFile}
+                        width={100}
+                        height={100}
                         className="w-full object-contain cursor-pointer"
                         onClick={() => setSelectedFile(null)}
                         alt=""

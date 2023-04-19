@@ -7,8 +7,22 @@ function StarRating({ rating }) {
 
   const renderStar = (type) => (
     <StarIcon
-      className={`h-8 w-8 text-yellow-500 ${type === "empty" && "opacity-40"}`}
+      className={`h-8 w-8 text-yellow-500 ${type === "empty" && "opacity-20"}`}
     />
+  );
+
+  const renderHalfStar = () => (
+    <div className="relative">
+      {renderStar("empty")}
+      <div
+        className="absolute inset-0 flex items-center"
+        style={{
+          clipPath: "polygon(0 0, 50% 0, 50% 100%, 0% 100%, 0 50%)",
+        }}
+      >
+        {renderStar("filled")}
+      </div>
+    </div>
   );
 
   return (
@@ -16,7 +30,7 @@ function StarRating({ rating }) {
       {[...Array(filledStars)].map((_, i) => (
         <span key={`star-${i}`}>{renderStar("filled")}</span>
       ))}
-      {hasHalfStar && renderStar("half")}
+      {hasHalfStar && renderHalfStar()}
       {[...Array(emptyStars)].map((_, i) => (
         <span key={`star-${filledStars + i}`}>{renderStar("empty")}</span>
       ))}

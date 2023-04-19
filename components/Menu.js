@@ -64,8 +64,6 @@ function Menu() {
           )}
         </motion.div>
       </div>
-
-      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-indigo-500 radial bg-left-top bg-cover relative"></div>
     </div>
   );
 }

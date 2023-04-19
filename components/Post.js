@@ -8,6 +8,7 @@ import {
 } from "@heroicons/react/24/outline";
 
 import StarRating from "./StarRating";
+import Image from "next/image";
 
 function Post({
   id,
@@ -68,6 +69,7 @@ function Post({
 // Example usage:
 getLocation("123.45.67.89"); // Replace with the user's IP address*/
 
+  console.log(rating);
   return (
     <div
       className="bg-white my-7 border
@@ -82,10 +84,17 @@ getLocation("123.45.67.89"); // Replace with the user's IP address*/
                     border p-1 mr-3"
         />
         <p className="flex-1 font-bold">{username}</p>
+        <StarRating rating={rating} />
       </div>
 
       {/* Image */}
-      <img src={img} alt="" className="object-cover w-full" />
+      <Image
+        src={img}
+        width={500}
+        height={500}
+        alt="IMAGE NOT FOUND"
+        className="object-cover w-full h-full"
+      />
       {/* Buttons */}
       <div className="flex justify-between pt-4 px-4 pb-4">
         <div className="flex space-x-4">

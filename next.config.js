@@ -2,8 +2,13 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['lh3.googleusercontent.com', 'www.google.com', 'fastly.picsum.photos'],
-  }
-}
+    domains: [
+      "lh3.googleusercontent.com",
+      "www.google.com",
+      "fastly.picsum.photos",
+      "firebasestorage.googleapis.com",
+    ],
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
