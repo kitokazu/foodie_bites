@@ -69,7 +69,6 @@ function Post({
 // Example usage:
 getLocation("123.45.67.89"); // Replace with the user's IP address*/
 
-  console.log(rating);
   return (
     <div
       className="bg-white my-7 border
@@ -77,13 +76,17 @@ getLocation("123.45.67.89"); // Replace with the user's IP address*/
     >
       {/* Header */}
       <div className="flex items-center p-5">
-        <img
+        <Image
           src={userImg}
+          width={500}
+          height={500}
           alt=""
           className="h-16 w-16 rounded-full object-contain
                     border p-1 mr-3"
         />
         <p className="flex-1 font-bold">{username}</p>
+        <p className="flex-2"> - {restaurant}</p>
+        <p>{restaurant}</p>
         <StarRating rating={rating} />
       </div>
 

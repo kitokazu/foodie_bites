@@ -65,6 +65,7 @@ function Posts() {
           img={post.data().image}
           caption={post.data().review}
           rating={post.data().rating}
+          restaurant={post.data().restaurant}
         />
       ))}
     </div>
