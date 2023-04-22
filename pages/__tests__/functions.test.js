@@ -3,12 +3,14 @@ import { sum, Dashboard, Header } from "../math.utils";
 import { render, screen } from "@testing-library/react";
 // import { Header } from "../../components/Header";
 
+// Add numbers test
 describe("sum module", () => {
   test("adds 1 + 2 to equal 3", () => {
     expect(sum(1, 2)).toBe(3);
   });
 });
 
+// Testing to see if the dashboard is rendered
 describe("dashboard", () => {
   test("Dashboard is rendered", () => {
     render(<Dashboard />);
@@ -21,6 +23,7 @@ describe("dashboard", () => {
   });
 });
 
+// Checks if the Header title is rendered
 describe("Header", () => {
   test("Header is rendered", () => {
     render(<Header />);
