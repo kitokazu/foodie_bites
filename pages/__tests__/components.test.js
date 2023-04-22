@@ -4,7 +4,7 @@ import { render, screen } from "@testing-library/react";
 import { Dashboard } from "../dashboard";
 
 describe("dashboard", () => {
-  it("renders correctly", () => {
+  test("renders correctly", () => {
     render(<Dashboard />);
 
     const header = screen.getByRole("heading");
