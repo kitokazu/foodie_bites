@@ -1,6 +1,7 @@
 // Create a test for add function in pages/functions.js
-import { sum, Dashboard, Header } from "../math.utils";
+import { sum, Dashboard, Header, getServerSideProps } from "../math.utils";
 import { render, screen } from "@testing-library/react";
+import { getProviders } from "next-auth/react";
 // import { Header } from "../../components/Header";
 
 // Add numbers test
@@ -33,5 +34,51 @@ describe("Header", () => {
 
     // expect(header).toHaveTextContent(headerText);
     expect(header.textContent).toBe(headerText);
+  });
+});
+
+// Testing the sign in
+jest.mock("next-auth/react", () => ({
+  getProviders: jest.fn().mockResolvedValue({
+    google: {
+      id: "google",
+      name: "Google",
+      type: "oauth",
+      signinUrl: "https://accounts.google.com/o/oauth2/auth",
+      callbackUrl: "http://localhost:3000/api/auth/callback/google",
+    },
+    facebook: {
+      id: "facebook",
+      name: "Facebook",
+      type: "oauth",
+      signinUrl: "https://www.facebook.com/v9.0/dialog/oauth",
+      callbackUrl: "http://localhost:3000/api/auth/callback/facebook",
+    },
+  }),
+}));
+
+describe("getServerSideProps", () => {
+  it("should return the providers data as props", async () => {
+    const { props } = await getServerSideProps();
+
+    expect(getProviders).toHaveBeenCalled();
+    expect(props).toEqual({
+      providers: {
+        google: {
+          id: "google",
+          name: "Google",
+          type: "oauth",
+          signinUrl: "https://accounts.google.com/o/oauth2/auth",
+          callbackUrl: "http://localhost:3000/api/auth/callback/google",
+        },
+        facebook: {
+          id: "facebook",
+          name: "Facebook",
+          type: "oauth",
+          signinUrl: "https://www.facebook.com/v9.0/dialog/oauth",
+          callbackUrl: "http://localhost:3000/api/auth/callback/facebook",
+        },
+      },
+    });
   });
 });
