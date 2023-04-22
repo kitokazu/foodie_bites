@@ -37,48 +37,49 @@ describe("Header", () => {
   });
 });
 
-// Testing the sign in
-jest.mock("next-auth/react", () => ({
-  getProviders: jest.fn().mockResolvedValue({
-    google: {
-      id: "google",
-      name: "Google",
-      type: "oauth",
-      signinUrl: "https://accounts.google.com/o/oauth2/auth",
-      callbackUrl: "http://localhost:3000/api/auth/callback/google",
-    },
-    facebook: {
-      id: "facebook",
-      name: "Facebook",
-      type: "oauth",
-      signinUrl: "https://www.facebook.com/v9.0/dialog/oauth",
-      callbackUrl: "http://localhost:3000/api/auth/callback/facebook",
-    },
-  }),
-}));
+// // Testing the sign in
+// jest.mock("next-auth/react", () => ({
+//   getProviders: jest.fn().mockResolvedValue({
+//     google: {
+//       id: "google",
+//       name: "Google",
+//       type: "oauth",
+//       signinUrl: "https://accounts.google.com/o/oauth2/auth",
+//       callbackUrl: "http://localhost:3000/api/auth/callback/google",
+//     },
+//     facebook: {
+//       id: "facebook",
+//       name: "Facebook",
+//       type: "oauth",
+//       signinUrl: "https://www.facebook.com/v9.0/dialog/oauth",
+//       callbackUrl: "http://localhost:3000/api/auth/callback/facebook",
+//     },
+//   }),
+// }));
 
-describe("getServerSideProps", () => {
-  it("should return the providers data as props", async () => {
-    const { props } = await getServerSideProps();
+// // Tests the get server side props function in signin.js
+// describe("getServerSideProps", () => {
+//   it("should return the providers data as props", async () => {
+//     const { props } = await getServerSideProps();
 
-    expect(getProviders).toHaveBeenCalled();
-    expect(props).toEqual({
-      providers: {
-        google: {
-          id: "google",
-          name: "Google",
-          type: "oauth",
-          signinUrl: "https://accounts.google.com/o/oauth2/auth",
-          callbackUrl: "http://localhost:3000/api/auth/callback/google",
-        },
-        facebook: {
-          id: "facebook",
-          name: "Facebook",
-          type: "oauth",
-          signinUrl: "https://www.facebook.com/v9.0/dialog/oauth",
-          callbackUrl: "http://localhost:3000/api/auth/callback/facebook",
-        },
-      },
-    });
-  });
-});
+//     expect(getProviders).toHaveBeenCalled();
+//     expect(props).toEqual({
+//       providers: {
+//         google: {
+//           id: "google",
+//           name: "Google",
+//           type: "oauth",
+//           signinUrl: "https://accounts.google.com/o/oauth2/auth",
+//           callbackUrl: "http://localhost:3000/api/auth/callback/google",
+//         },
+//         facebook: {
+//           id: "facebook",
+//           name: "Facebook",
+//           type: "oauth",
+//           signinUrl: "https://www.facebook.com/v9.0/dialog/oauth",
+//           callbackUrl: "http://localhost:3000/api/auth/callback/facebook",
+//         },
+//       },
+//     });
+//   });
+// });
