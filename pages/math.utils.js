@@ -11,3 +11,14 @@ export function Dashboard() {
     </div>
   );
 }
+
+export function Header() {
+  return (
+    <div
+      data-testid="header"
+      className="text-3xl font-serif text-stone-600 mt-5 ml-5"
+    >
+      FoodieBites
+    </div>
+  );
+}

@@ -36,7 +36,10 @@ function Header() {
           className="relative hidden lg:inline w-36 h-12 cursor-pointer"
           onClick={() => router.push("/")}
         >
-          <div className="text-3xl font-serif text-stone-600 mt-5 ml-5">
+          <div
+            data-testid="header"
+            className="text-3xl font-serif text-stone-600 mt-5 ml-5"
+          >
             FoodieBites
           </div>
         </div>

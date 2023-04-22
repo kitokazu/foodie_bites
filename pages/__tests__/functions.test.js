@@ -1,6 +1,7 @@
 // Create a test for add function in pages/functions.js
-import { sum, Dashboard } from "../math.utils";
+import { sum, Dashboard, Header } from "../math.utils";
 import { render, screen } from "@testing-library/react";
+// import { Header } from "../../components/Header";
 
 describe("sum module", () => {
   test("adds 1 + 2 to equal 3", () => {
@@ -9,11 +10,23 @@ describe("sum module", () => {
 });
 
 describe("dashboard", () => {
-  test("renders correctly", () => {
+  test("Dashboard is rendered", () => {
     render(<Dashboard />);
 
     const header = screen.getByRole("heading");
     const headerText = "Hello World";
+
+    // expect(header).toHaveTextContent(headerText);
+    expect(header.textContent).toBe(headerText);
+  });
+});
+
+describe("Header", () => {
+  test("Header is rendered", () => {
+    render(<Header />);
+
+    const header = screen.getByTestId("header");
+    const headerText = "FoodieBites";
 
     // expect(header).toHaveTextContent(headerText);
     expect(header.textContent).toBe(headerText);
