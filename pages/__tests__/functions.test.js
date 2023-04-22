@@ -1,7 +1,7 @@
 // Create a test for add function in pages/functions.js
 import { sum, Dashboard, Header, getServerSideProps } from "../math.utils";
 import { render, screen } from "@testing-library/react";
-import { getProviders } from "next-auth/react";
+// import { getProviders } from "next-auth/react";
 // import { Header } from "../../components/Header";
 
 // Add numbers test
