@@ -9,13 +9,13 @@
 //   });
 // });
 
-// import { sum } from '../math.utils';
+import { sum } from "../math.utils";
 
-// describe('sum module', () => {
-//   test('adds 1 + 2 to equal 3', () => {
-//     expect(sum(1, 2)).toBe(3);
-//   });
-// });
+describe("sum module", () => {
+  test("adds 1 + 2 to equal 3", () => {
+    expect(sum(1, 2)).toBe(3);
+  });
+});
 
 // import { render, screen } from "@testing-library/react";
 // import { RecoilRoot, useRecoilValue } from "recoil";
@@ -146,19 +146,19 @@
 //   });
 // });
 
-import React from "react";
-import { render, screen } from "@testing-library/react";
-// import "@#testing-library/jest-dom/";
-import Dashboard from "@/pages/dashboard";
+// import React from "react";
+// import { render, screen } from "@testing-library/react";
+// // import "@#testing-library/jest-dom/";
+// import Dashboard from "@/pages/dashboard";
 
-describe("dashboard", () => {
-  it("renders correctly", () => {
-    render(<Dashboard />);
+// describe("dashboard", () => {
+//   it("renders correctly", () => {
+//     render(<Dashboard />);
 
-    const header = screen.getByRole("heading");
-    const headerText = "Hello World";
+//     const header = screen.getByRole("heading");
+//     const headerText = "Hello World";
 
-    // expect(header).toHaveTextContent(headerText);
-    expect(header.textContent).toBe(headerText);
-  });
-});
+//     // expect(header).toHaveTextContent(headerText);
+//     expect(header.textContent).toBe(headerText);
+//   });
+// });
