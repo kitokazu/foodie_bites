@@ -1,5 +1,5 @@
 import React from "react";
-import { getProviders } from "next-auth/react";
+// import { getProviders } from "next-auth/react";
 
 export function sum(num1, num2) {
   return num1 + num2;
@@ -24,11 +24,11 @@ export function Header() {
   );
 }
 
-export async function getServerSideProps() {
-  const providers = await getProviders();
-  return {
-    props: {
-      providers,
-    },
-  };
-}
+// export async function getServerSideProps() {
+//   const providers = await getProviders();
+//   return {
+//     props: {
+//       providers,
+//     },
+//   };
+// }
