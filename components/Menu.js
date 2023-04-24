@@ -1,6 +1,6 @@
-import Image from "next/image";
-import McDonalds_Long from "../images/mcdonalds_long.jpeg";
-import McDonalds from "../images/mcdonalds_logo.png";
+import Image from 'next/image'
+import McDonalds_Long from '../images/mcdonalds_long.jpeg'
+import McDonalds from '../images/mcdonalds_logo.png'
 import {
   MagnifyingGlassIcon,
   HomeIcon,
@@ -8,20 +8,20 @@ import {
   Bars3Icon,
   EnvelopeIcon,
   ShoppingCartIcon,
-} from "@heroicons/react/24/outline";
+} from '@heroicons/react/24/outline'
 
-import { useRouter } from "next/router";
-import LoginModal from "./LoginModal";
-import { motion } from "framer-motion";
-import { signIn, signOut, useSession } from "next-auth/react";
-import { useRecoilState } from "recoil";
-import { modalState } from "../atoms/modalAtom";
+import { useRouter } from 'next/router'
+import LoginModal from './LoginModal'
+import { motion } from 'framer-motion'
+import { signIn, signOut, useSession } from 'next-auth/react'
+import { useRecoilState } from 'recoil'
+import { modalState } from '../atoms/modalAtom'
 
 function Menu() {
-  const isSignedIn = true;
-  const router = useRouter();
-  const { data: session } = useSession();
-  const [open, setOpen] = useRecoilState(modalState);
+  const isSignedIn = true
+  const router = useRouter()
+  const { data: session } = useSession()
+  const [open, setOpen] = useRecoilState(modalState)
 
   return (
     <div className="h-screen flex items-center bg-gray-50">
@@ -36,19 +36,19 @@ function Menu() {
               <>
                 <a
                   className="menuItem"
-                  onClick={() => router.push("/homePage")}
+                  onClick={() => router.push('/homePage')}
                 >
                   FEED
                 </a>
                 <a
                   className="menuItem"
-                  onClick={() => router.push("/profilePage")}
+                  onClick={() => router.push('/profilePage')}
                 >
                   PROFILE
                 </a>
                 <a
                   className="menuItem"
-                  onClick={() => router.push("/messagePage")}
+                  onClick={() => router.push('/messagePage')}
                 >
                   MESSAGES
                 </a>
@@ -65,7 +65,7 @@ function Menu() {
         </motion.div>
       </div>
     </div>
-  );
+  )
 }
 
-export default Menu;
+export default Menu

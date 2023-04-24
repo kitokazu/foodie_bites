@@ -1,14 +1,24 @@
-import { EllipsisHorizontalIcon } from "@heroicons/react/24/solid";
+import { useSession } from 'next-auth/react'
 
 import {
   HeartIcon,
   FaceSmileIcon,
   ChatBubbleBottomCenterTextIcon,
   BuildingStorefrontIcon,
-} from "@heroicons/react/24/outline";
+} from '@heroicons/react/24/outline'
 
-import StarRating from "./StarRating";
-import Image from "next/image";
+import StarRating from './StarRating'
+import Image from 'next/image'
+import { useEffect, useState } from 'react'
+import {
+  addDoc,
+  collection,
+  onSnapshot,
+  orderBy,
+  query,
+  serverTimestamp,
+} from 'firebase/firestore'
+import { db } from '../firebase'
 
 function Post({
   id,
@@ -21,11 +31,41 @@ function Post({
   review,
   date,
 }) {
-  const apiKey = process.env.GOOGLE_PLACES_API_KEY;
-  const radius = 1000; // Radius of the search area in meters
-  const type = "restaurant"; // Type of place to search for
+  const apiKey = process.env.GOOGLE_PLACES_API_KEY
+  const radius = 1000 // Radius of the search area in meters
+  const type = 'restaurant' // Type of place to search for
 
-  const newRating = rating + "";
+  const newRating = rating + ''
+
+  const { data: session } = useSession()
+  const [comment, setComment] = useState('')
+  const [comments, setComments] = useState([])
+
+  useEffect(
+    () =>
+      onSnapshot(
+        query(
+          collection(db, 'posts', id, 'comments'),
+          orderBy('timestamp', 'desc')
+        ),
+        (snapshot) => setComments(snapshot.docs)
+      ),
+    [db]
+  )
+
+  const sendComment = async (e) => {
+    e.preventDefault()
+
+    const commentToSend = comment
+    setComment('')
+
+    await addDoc(collection(db, 'posts', id, 'comments'), {
+      comment: commentToSend,
+      username: session.user.username,
+      userImage: session.user.image,
+      timeStamp: serverTimestamp(),
+    })
+  }
 
   /*var axios = require('axios');
 
@@ -64,10 +104,7 @@ function Post({
       console.log("Longitude:", location.location.lng);
     });
   });
-}
-
-// Example usage:
-getLocation("123.45.67.89"); // Replace with the user's IP address*/
+} */
 
   return (
     <div
@@ -99,28 +136,45 @@ getLocation("123.45.67.89"); // Replace with the user's IP address*/
         className="object-cover w-full h-full"
       />
       {/* Buttons */}
-      <div className="flex justify-between pt-4 px-4 pb-4">
-        <div className="flex space-x-4">
-          <HeartIcon className="btn" />
-          <ChatBubbleBottomCenterTextIcon className="btn" />
-        </div>
+      {session && (
+        <div className="flex justify-between pt-4 px-4 pb-4">
+          <div className="flex space-x-4">
+            <HeartIcon className="btn" />
+            <ChatBubbleBottomCenterTextIcon className="btn" />
+          </div>
 
-        <BuildingStorefrontIcon className="btn" />
-      </div>
+          <BuildingStorefrontIcon className="btn" />
+        </div>
+      )}
+
       {/* Caption */}
+      <p className="p-5 truncate">
+        <span className="font-bold mr-1">{username}</span>
+        {review}
+      </p>
       {/* Comments */}
+
+      {/* Input Box*/}
       <form className="flex items-center p-4">
         <FaceSmileIcon className="h-7" />
         <input
           type="text"
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
           placeholder="Add a comment..."
           className="border-none flex-1 focus:ring-0 outline-none"
         />
-        <button className="font-semibold text-blue-400">Post</button>
+        <button
+          type="submit"
+          disabled={!comment.trim()}
+          className="font-semibold text-blue-400"
+          onClick={sendComment}
+        >
+          Post
+        </button>
       </form>
-      {/* Input Box*/}
     </div>
-  );
+  )
 }
 
-export default Post;
+export default Post

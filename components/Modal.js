@@ -1,64 +1,64 @@
-import React from "react";
-import { useRecoilState } from "recoil";
-import { modalState } from "../atoms/modalAtom";
-import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useState, useRef } from "react";
-import { CameraIcon } from "@heroicons/react/24/outline";
-import { db, storage } from "../firebase";
+import React from 'react'
+import { useRecoilState } from 'recoil'
+import { modalState } from '../atoms/modalAtom'
+import { Dialog, Transition } from '@headlessui/react'
+import { Fragment, useState, useRef } from 'react'
+import { CameraIcon } from '@heroicons/react/24/outline'
+import { db, storage } from '../firebase'
 import {
   addDoc,
   collection,
   doc,
   serverTimestamp,
   updateDoc,
-} from "@firebase/firestore";
-import { ref, getDownloadURL, uploadString } from "@firebase/storage";
+} from '@firebase/firestore'
+import { ref, getDownloadURL, uploadString } from '@firebase/storage'
 
-import { useSession } from "next-auth/react";
-import Image from "next/image";
+import { useSession } from 'next-auth/react'
+import Image from 'next/image'
 
 function Modal() {
   // Session Data
-  const { data: session } = useSession();
+  const { data: session } = useSession()
 
   // Recoil state for rendering the modal
-  const [open, setOpen] = useRecoilState(modalState);
+  const [open, setOpen] = useRecoilState(modalState)
 
   // state for rating
-  const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState(0)
   const handleRatingChange = (event) => {
-    setRating(parseFloat(event.target.value));
-  };
+    setRating(parseFloat(event.target.value))
+  }
 
   // useRef hook for file picking
-  const filePickerRef = useRef();
-  const [selectedFile, setSelectedFile] = useState(null);
+  const filePickerRef = useRef()
+  const [selectedFile, setSelectedFile] = useState(null)
 
   // function for handling the file
   const addImageToPost = (e) => {
-    const reader = new FileReader();
+    const reader = new FileReader()
     if (e.target.files[0]) {
-      reader.readAsDataURL(e.target.files[0]);
+      reader.readAsDataURL(e.target.files[0])
     }
 
     reader.onload = (readerEvent) => {
-      setSelectedFile(readerEvent.target.result);
-    };
-  };
+      setSelectedFile(readerEvent.target.result)
+    }
+  }
 
   // References for the input fields
-  const restaurantRef = useRef(null);
-  const locationRef = useRef(null);
-  const linkRef = useRef(null);
-  const ratingRef = useRef(null);
-  const reviewRef = useRef(null);
+  const restaurantRef = useRef(null)
+  const locationRef = useRef(null)
+  const linkRef = useRef(null)
+  const ratingRef = useRef(null)
+  const reviewRef = useRef(null)
 
   // Function for uploading post
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false)
   const uploadPost = async () => {
-    if (loading) return;
+    if (loading) return
 
-    setLoading(true);
+    setLoading(true)
 
     // 1) Create a post and add to firestore 'posts' collection
     // 2) Then get the psot ID for the newly created post
@@ -66,7 +66,7 @@ function Modal() {
     // 4) Get a download URL from gb storage and update the original post with the image
 
     // Schema/Doc to be uploaded
-    const docRef = await addDoc(collection(db, "posts"), {
+    const docRef = await addDoc(collection(db, 'posts'), {
       username: session.user.username,
       profileImg: session.user.image,
 
@@ -78,25 +78,25 @@ function Modal() {
 
       //use the servers timezone
       timestamp: serverTimestamp(),
-    });
+    })
 
-    console.log("New doc added with ID", docRef.id);
+    console.log('New doc added with ID', docRef.id)
 
-    const imageRef = ref(storage, `posts/${docRef.id}/image`);
+    const imageRef = ref(storage, `posts/${docRef.id}/image`)
 
-    await uploadString(imageRef, selectedFile, "data_url").then(
+    await uploadString(imageRef, selectedFile, 'data_url').then(
       async (snapshot) => {
-        const downloadURL = await getDownloadURL(imageRef);
-        await updateDoc(doc(db, "posts", docRef.id), {
+        const downloadURL = await getDownloadURL(imageRef)
+        await updateDoc(doc(db, 'posts', docRef.id), {
           image: downloadURL,
-        });
+        })
       }
-    );
+    )
 
-    setOpen(false);
-    setLoading(false);
-    setSelectedFile(null);
-  };
+    setOpen(false)
+    setLoading(false)
+    setSelectedFile(null)
+  }
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -242,7 +242,7 @@ function Modal() {
                     className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:text-sm disabled:bg-gray-300 disabled:cursor-not-allowed hover:disabled:bg-gray-300"
                     onClick={uploadPost}
                   >
-                    {loading ? "Uploading..." : "Upload Review"}
+                    {loading ? 'Uploading...' : 'Upload Review'}
                   </button>
                 </div>
               </div>
@@ -251,7 +251,7 @@ function Modal() {
         </div>
       </Dialog>
     </Transition.Root>
-  );
+  )
 }
 
-export default Modal;
+export default Modal

@@ -1,7 +1,7 @@
-import Post from "./Post";
-import { useState, useEffect } from "react";
-import { collection, query, onSnapshot, orderBy } from "@firebase/firestore";
-import { db } from "../firebase";
+import Post from './Post'
+import { useState, useEffect } from 'react'
+import { collection, query, onSnapshot, orderBy } from '@firebase/firestore'
+import { db } from '../firebase'
 
 // const posts = [
 //   {
@@ -39,20 +39,20 @@ import { db } from "../firebase";
 // ];
 
 function Posts() {
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState([])
 
   useEffect(() => {
     // Using snapshot listener from firebase
     return onSnapshot(
-      query(collection(db, "posts")),
-      orderBy("timestamp", "desc"),
+      query(collection(db, 'posts')),
+      orderBy('timestamp', 'desc'),
       (snapshot) => {
-        setPosts(snapshot.docs);
+        setPosts(snapshot.docs)
       }
-    );
-  }, [db]);
+    )
+  }, [db])
 
-  console.log(posts);
+  console.log(posts)
 
   return (
     <div>
@@ -66,10 +66,11 @@ function Posts() {
           caption={post.data().review}
           rating={post.data().rating}
           restaurant={post.data().restaurant}
+          review={post.data().review}
         />
       ))}
     </div>
-  );
+  )
 }
 
-export default Posts;
+export default Posts

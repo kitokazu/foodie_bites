@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react'
 
 const UserList = ({ onSelect, selectedUser }) => {
-  const users = ["Alice", "Bob", "Charlie", "Dave", "Eve"];
+  const users = ['Alice', 'Bob', 'Charlie', 'Dave', 'Eve']
 
   return (
     <div className="w-1/5 border-r p-4">
@@ -11,7 +11,7 @@ const UserList = ({ onSelect, selectedUser }) => {
           <li
             key={user}
             className={`cursor-pointer py-2 ${
-              selectedUser === user ? "font-bold" : ""
+              selectedUser === user ? 'font-bold' : ''
             }`}
             onClick={() => {}}
           >
@@ -20,7 +20,7 @@ const UserList = ({ onSelect, selectedUser }) => {
         ))}
       </ul>
     </div>
-  );
-};
+  )
+}
 
-export default UserList;
+export default UserList

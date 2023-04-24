@@ -1,55 +1,55 @@
-import Image from "next/image";
-import { Cog6ToothIcon } from "@heroicons/react/24/outline";
-import profilePic from "../images/headshot.jpeg";
-import { useRouter } from "next/router";
-import { signIn, signOut, useSession } from "next-auth/react";
+import Image from 'next/image'
+import { Cog6ToothIcon } from '@heroicons/react/24/outline'
+import profilePic from '../images/headshot.jpeg'
+import { useRouter } from 'next/router'
+import { signIn, signOut, useSession } from 'next-auth/react'
 
-import bruxies from "../images/bruxies.jpeg";
-import thaiTowne from "../images/thai-towne.jpeg";
-import pizzaPress from "../images/pizza-press.jpeg";
-import philz from "../images/philz.jpeg";
+import bruxies from '../images/bruxies.jpeg'
+import thaiTowne from '../images/thai-towne.jpeg'
+import pizzaPress from '../images/pizza-press.jpeg'
+import philz from '../images/philz.jpeg'
 
-import { EllipsisHorizontalIcon } from "@heroicons/react/24/solid";
+import { EllipsisHorizontalIcon } from '@heroicons/react/24/solid'
 
-import StarRating from "./StarRating";
+import StarRating from './StarRating'
 
 export default function ProfileSidebar() {
-  const { data: session } = useSession();
+  const { data: session } = useSession()
 
   const posts = [
     {
       id: 1,
       src: thaiTowne,
-      title: "Thai Towne",
-      date: "04/01/2023",
+      title: 'Thai Towne',
+      date: '04/01/2023',
       rating: 3,
-      link: "https://www.yelp.com/biz/thai-towne-eatery-orange",
+      link: 'https://www.yelp.com/biz/thai-towne-eatery-orange',
     },
     {
       id: 2,
       src: bruxies,
-      title: "Bruxies",
-      date: "03/20/2023",
+      title: 'Bruxies',
+      date: '03/20/2023',
       rating: 4,
-      link: "https://www.yelp.com/biz/bruxies-orange",
+      link: 'https://www.yelp.com/biz/bruxies-orange',
     },
     {
       id: 3,
       src: philz,
-      title: "Philz Coffee",
-      date: "03/15/2023",
+      title: 'Philz Coffee',
+      date: '03/15/2023',
       rating: 5,
-      link: "https://www.yelp.com/biz/philz-coffee-orange",
+      link: 'https://www.yelp.com/biz/philz-coffee-orange',
     },
     {
       id: 4,
       src: pizzaPress,
-      title: "Pizza Press",
-      date: "03/10/2023",
+      title: 'Pizza Press',
+      date: '03/10/2023',
       rating: 3,
-      link: "https://www.yelp.com/biz/pizza-press-orange",
+      link: 'https://www.yelp.com/biz/pizza-press-orange',
     },
-  ];
+  ]
 
   return (
     <>
@@ -83,5 +83,5 @@ export default function ProfileSidebar() {
         </div>
       ))}
     </>
-  );
+  )
 }

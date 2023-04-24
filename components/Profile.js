@@ -1,17 +1,17 @@
-import Image from "next/image";
-import {} from "@heroicons/react/24/outline";
-import profilePic from "../images/headshot.jpeg";
+import Image from 'next/image'
+import {} from '@heroicons/react/24/outline'
+import profilePic from '../images/headshot.jpeg'
 
-import shirt from "../images/shirt.jpeg";
-import shoes from "../images/shoes.jpeg";
-import pants from "../images/pants.jpeg";
-import hat from "../images/hat.jpeg";
+import shirt from '../images/shirt.jpeg'
+import shoes from '../images/shoes.jpeg'
+import pants from '../images/pants.jpeg'
+import hat from '../images/hat.jpeg'
 
-import { useRouter } from "next/router";
-import { signIn, signOut, useSession } from "next-auth/react";
-import { Cog6ToothIcon } from "@heroicons/react/24/outline";
-import ProfileSidebar from "./ProfileSidebar";
-import ProfilePost from "./ProfilePost";
+import { useRouter } from 'next/router'
+import { signIn, signOut, useSession } from 'next-auth/react'
+import { Cog6ToothIcon } from '@heroicons/react/24/outline'
+import ProfileSidebar from './ProfileSidebar'
+import ProfilePost from './ProfilePost'
 
 function ProfilePage() {
   return (
@@ -21,7 +21,7 @@ function ProfilePage() {
         <ProfilePost />
       </div>
     </div>
-  );
+  )
 }
 
-export default ProfilePage;
+export default ProfilePage

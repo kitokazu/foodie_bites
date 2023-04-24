@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import {sum as addition} from './math.utils';
-import { Inter } from '@next/font/google';
+import { useState } from 'react'
+import { sum as addition } from './math.utils'
+import { Inter } from '@next/font/google'
 import styles from '@/styles/Home.module.css'
 import Head from 'next/head'
 import Header from '@/components/Header'

@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react'
 // import { getProviders } from "next-auth/react";
 
 export function sum(num1, num2) {
-  return num1 + num2;
+  return num1 + num2
 }
 
 export function Dashboard() {
@@ -10,7 +10,7 @@ export function Dashboard() {
     <div>
       <h1>Hello World</h1>
     </div>
-  );
+  )
 }
 
 export function Header() {
@@ -21,7 +21,7 @@ export function Header() {
     >
       FoodieBites
     </div>
-  );
+  )
 }
 
 // export async function getServerSideProps() {

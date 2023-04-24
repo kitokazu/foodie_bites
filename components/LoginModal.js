@@ -1,29 +1,29 @@
-import Image from "next/image";
+import Image from 'next/image'
 import {
   MagnifyingGlassIcon,
   HomeIcon,
   UserCircleIcon,
   Bars3Icon,
   EnvelopeIcon,
-  ShoppingCartIcon
-} from "@heroicons/react/24/outline";
+  ShoppingCartIcon,
+} from '@heroicons/react/24/outline'
 
 import { useRouter } from 'next/router'
-import { useState } from "react";
+import { useState } from 'react'
 
 function LoginModal() {
-  const [showModal, setShowModal] = useState(false);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [showModal, setShowModal] = useState(false)
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
 
   const handleSignIn = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     // handle sign-in logic here
-    console.log(`Username: ${username}, Password: ${password}`);
-    setUsername("");
-    setPassword("");
-    setShowModal(false);
-  };
+    console.log(`Username: ${username}, Password: ${password}`)
+    setUsername('')
+    setPassword('')
+    setShowModal(false)
+  }
 
   return (
     <>
@@ -97,9 +97,7 @@ function LoginModal() {
         </div>
       )}
     </>
-  );
+  )
 }
 
 export default LoginModal
-
-

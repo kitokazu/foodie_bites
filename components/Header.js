@@ -1,6 +1,6 @@
-import Image from "next/image";
-import McDonalds_Long from "../images/mcdonalds_long.jpeg";
-import McDonalds from "../images/mcdonalds_logo.png";
+import Image from 'next/image'
+import McDonalds_Long from '../images/mcdonalds_long.jpeg'
+import McDonalds from '../images/mcdonalds_logo.png'
 import {
   MagnifyingGlassIcon,
   HomeIcon,
@@ -9,24 +9,24 @@ import {
   EnvelopeIcon,
   ShoppingCartIcon,
   PlusCircleIcon,
-} from "@heroicons/react/24/outline";
+} from '@heroicons/react/24/outline'
 
-import { useRouter } from "next/router";
-import { signIn, signOut, useSession } from "next-auth/react";
-import { useRecoilState } from "recoil";
-import { modalState } from "../atoms/modalAtom";
+import { useRouter } from 'next/router'
+import { signIn, signOut, useSession } from 'next-auth/react'
+import { useRecoilState } from 'recoil'
+import { modalState } from '../atoms/modalAtom'
 
 function Header() {
-  const { data: session } = useSession();
+  const { data: session } = useSession()
 
   // Set function
-  const [open, setOpen] = useRecoilState(modalState);
+  const [open, setOpen] = useRecoilState(modalState)
 
   // // If we want a read only value
   // const open2 = useRecoilValue(modalState);
 
-  console.log(session);
-  const router = useRouter();
+  console.log(session)
+  const router = useRouter()
 
   return (
     <div className="shadow-sm border-b bg-white sticky top-0 z-50">
@@ -34,7 +34,7 @@ function Header() {
         {/* Left Side */}
         <div
           className="relative hidden lg:inline w-36 h-12 cursor-pointer"
-          onClick={() => router.push("/")}
+          onClick={() => router.push('/')}
         >
           <div
             data-testid="header"
@@ -64,7 +64,7 @@ function Header() {
         <div className="flex dark:text-black items-center justify-end space-x-4">
           <HomeIcon
             className="navBtn"
-            onClick={() => router.push("/menuPage")}
+            onClick={() => router.push('/menuPage')}
           />
 
           {session ? (
@@ -76,7 +76,7 @@ function Header() {
               <div className="relative navBtn">
                 <EnvelopeIcon
                   className="navBtn"
-                  onClick={() => router.push("/messagePage")}
+                  onClick={() => router.push('/messagePage')}
                 />
                 <div className="absolute -top-2 -right-2 text-s w-5 h-5 bg-red-500 rounded-full flex items-center justify-center animate-pulse text-white">
                   3
@@ -84,7 +84,7 @@ function Header() {
               </div>
               <Bars3Icon className="h-6 md:hidden cursor-pointer" />
               <Image
-                onClick={() => router.push("/profilePage")}
+                onClick={() => router.push('/profilePage')}
                 src={session.user.image}
                 alt="profile pic"
                 className="rounded-full cursor-pointer"
@@ -104,7 +104,7 @@ function Header() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default Header;
+export default Header
