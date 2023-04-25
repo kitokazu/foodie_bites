@@ -105,6 +105,8 @@ function Post({
     });
   });
 } */
+
+console.log({date})
   return (
     <div
       className="bg-white my-7 border
@@ -121,9 +123,12 @@ function Post({
                     border p-1 mr-3"
         />
         <p className="flex-1 font-bold">{username}</p>
-        <p className="flex-2"> - {restaurant}</p>
-        <p>{restaurant}</p>
-        <StarRating rating={rating} />
+        <p className="flex-1 font-bold text-xl"> {restaurant}</p>
+        <div>
+          <StarRating rating={rating} />
+          <p>{date}</p>
+        </div>
+        
       </div>
 
       {/* Image */}

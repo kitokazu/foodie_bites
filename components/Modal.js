@@ -70,7 +70,7 @@ function Modal() {
       username: session.user.username,
       profileImg: session.user.image,
 
-      retaurant: restaurantRef.current.value,
+      restaurant: restaurantRef.current.value,
       location: locationRef.current.value,
       link: linkRef.current.value,
       rating: ratingRef.current.value,
