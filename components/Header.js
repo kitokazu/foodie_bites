@@ -25,7 +25,6 @@ function Header() {
   // // If we want a read only value
   // const open2 = useRecoilValue(modalState);
 
-  console.log(session)
   const router = useRouter()
 
   return (

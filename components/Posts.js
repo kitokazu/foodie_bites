@@ -1,74 +1,71 @@
 import Post from './Post'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, use } from 'react'
 import { collection, query, onSnapshot, orderBy } from '@firebase/firestore'
 import { db } from '../firebase'
-
-// const posts = [
-//   {
-//     id: "123",
-//     username: "rrezvani01",
-//     userImg:
-//       "https://fastly.picsum.photos/id/11/2500/1667.jpg?hmac=xxjFJtAPgshYkysU_aqx2sZir-kIOjNR9vx0te7GycQ",
-//     img: "https://fastly.picsum.photos/id/11/2500/1667.jpg?hmac=xxjFJtAPgshYkysU_aqx2sZir-kIOjNR9vx0te7GycQ",
-//     caption: "This is dope",
-//   },
-//   {
-//     id: "456",
-//     username: "kitokazu",
-//     userImg:
-//       "https://fastly.picsum.photos/id/15/2500/1667.jpg?hmac=Lv03D1Y3AsZ9L2tMMC1KQZekBVaQSDc1waqJ54IHvo4",
-//     img: "https://fastly.picsum.photos/id/15/2500/1667.jpg?hmac=Lv03D1Y3AsZ9L2tMMC1KQZekBVaQSDc1waqJ54IHvo4",
-//     caption: "How interesting",
-//   },
-//   {
-//     id: "789",
-//     username: "cattleLover123",
-//     userImg:
-//       "https://fastly.picsum.photos/id/22/4434/3729.jpg?hmac=fjZdkSMZJNFgsoDh8Qo5zdA_nSGUAWvKLyyqmEt2xs0",
-//     img: "https://fastly.picsum.photos/id/22/4434/3729.jpg?hmac=fjZdkSMZJNFgsoDh8Qo5zdA_nSGUAWvKLyyqmEt2xs0",
-//     caption: "What an awesome day",
-//   },
-//   {
-//     id: "101112",
-//     username: "warriorsLover123",
-//     userImg:
-//       "https://fastly.picsum.photos/id/1/5000/3333.jpg?hmac=Asv2DU3rA_5D1xSe22xZK47WEAN0wjWeFOhzd13ujW4",
-//     img: "https://fastly.picsum.photos/id/1/5000/3333.jpg?hmac=Asv2DU3rA_5D1xSe22xZK47WEAN0wjWeFOhzd13ujW4",
-//     caption: "Coolio",
-//   },
-// ];
+import Moment from 'react-moment'
 
 function Posts() {
   const [posts, setPosts] = useState([])
 
   useEffect(() => {
     // Using snapshot listener from firebase
-    return onSnapshot(
+    onSnapshot(
       query(collection(db, 'posts')),
       orderBy('timestamp', 'desc'),
       (snapshot) => {
+        sortPosts(posts)
         setPosts(snapshot.docs)
       }
     )
   }, [db])
 
-  console.log(posts)
+  // console.log(
+  //   posts.map((post) => {
+  //     console.log(post.data().timestamp?.toDate().toString())
+  //   })
+  // )
+
+  const sortPosts = (posts) => {
+    // Sort the posts by the timestamp and setPosts
+    setPosts(
+      posts.sort((a, b) => {
+        return (
+          b.data().timestamp?.toDate().getTime() -
+          a.data().timestamp?.toDate().getTime()
+        )
+      })
+    )
+  }
+
+  // Sorting the posts by the Timestamp
+  useEffect(() => {
+    sortPosts(posts)
+    console.log(posts)
+  })
+
+  // date={(post.data().timestamp).map((timestamp) => timestamp.toDate())}
 
   return (
     <div>
-      {posts.map((post) => (
-        <Post
-          key={post.id}
-          id={post.id}
-          username={post.data().username}
-          userImg={post.data().profileImg}
-          img={post.data().image}
-          caption={post.data().review}
-          rating={post.data().rating}
-          restaurant={post.data().restaurant}
-          review={post.data().review}
-        />
-      ))}
+      {posts.map((post) => {
+        const date = post.data().timestamp?.toDate().toString()
+
+        console.log(post.data().timestamp?.toDate().toString())
+        return (
+          <Post
+            key={post.id}
+            id={post.id}
+            username={post.data().username}
+            userImg={post.data().profileImg}
+            img={post.data().image}
+            caption={post.data().review}
+            rating={post.data().rating}
+            restaurant={post.data().restaurant}
+            review={post.data().review}
+            date={<Moment fromNow>{date}</Moment>}
+          />
+        )
+      })}
     </div>
   )
 }

@@ -150,7 +150,7 @@ function Post({
         <p className="flex-1 font-bold text-xl"> {restaurant}</p>
         <div>
           <StarRating rating={rating} />
-          <p>{date}</p>
+          <p className="text-end mt-1">{date}</p>
         </div>
       </div>
 
