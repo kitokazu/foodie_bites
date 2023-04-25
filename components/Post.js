@@ -8,6 +8,8 @@ import {
   BuildingStorefrontIcon,
 } from '@heroicons/react/24/outline'
 
+import Link from 'next/link';
+
 import StarRating from './StarRating'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
@@ -174,10 +176,13 @@ function Post({
             ) : (
               <HeartIcon onClick={likePost} className="btn" />
             )}
+
             <ChatBubbleBottomCenterTextIcon className="btn" />
           </div>
-
-          <BuildingStorefrontIcon className="btn" />
+          <Link href="https://cortinasitalianfood.com/">
+            <BuildingStorefrontIcon className="btn" />
+          </Link>
+          
         </div>
       )}
 
