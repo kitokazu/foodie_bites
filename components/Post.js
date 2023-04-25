@@ -19,6 +19,7 @@ import {
   serverTimestamp,
 } from 'firebase/firestore'
 import { db } from '../firebase'
+import Moment from 'react-moment'
 
 function Post({
   id,
@@ -37,18 +38,14 @@ function Post({
 
   const newRating = rating + ''
 
-  const { data: session } = useSession();
-  const [comment, setComment] = useState('');
-  const [comments, setComments] = useState([]);
+  const { data: session } = useSession()
+  const [comment, setComment] = useState('')
+  const [comments, setComments] = useState([])
 
   useEffect(
     () =>
-      onSnapshot(
-        query(
-          collection(db, 'posts', id, 'comments'),
-          orderBy('timestamp', 'desc')
-        ),
-        (snapshot) => setComments(snapshot.docs)
+      onSnapshot(query(collection(db, 'posts', id, 'comments')), (snapshot) =>
+        setComments(snapshot.docs)
       ),
     [db]
   )
@@ -64,8 +61,8 @@ function Post({
       username: session.user.username,
       userImage: session.user.image,
       timeStamp: serverTimestamp(),
-    });
-  };
+    })
+  }
 
   /*var axios = require('axios');
 
@@ -105,8 +102,6 @@ function Post({
     });
   });
 } */
-
-console.log({date})
   return (
     <div
       className="bg-white my-7 border
@@ -128,7 +123,6 @@ console.log({date})
           <StarRating rating={rating} />
           <p>{date}</p>
         </div>
-        
       </div>
 
       {/* Image */}
@@ -158,36 +152,48 @@ console.log({date})
       </p>
       {/* Comments */}
       {comments.length > 0 && (
-        <div className='ml-10 h-20 overflow-y-scroll scrollbar-thumb-black scrollbar-thin'>
+        <div className="ml-10 h-20 overflow-y-scroll scrollbar-thumb-black scrollbar-thin">
           {comments.map((comment) => (
-            <div key={comment.data().id} className='flex items-center space-x-2 mb-3'>
-              <img className='h-7 rounded full' src={comment.data().userImage} alt='' />
+            <div key={comment.id} className="flex items-center space-x-2 mb-3">
+              <img
+                className="h-7 rounded full"
+                src={comment.data().userImage}
+                alt=""
+              />
+              <p className='text-sm flex-1'>
+                <span className="font-bold">{comment.data().username}</span>
+                {" "}
+                {comment.data().comment}
+              </p>
+
+              <Moment fromNow className='pr-5 text-xs'>
+                {comment.data().timeStamp?.toDate()}
+              </Moment>
             </div>
           ))}
-          <p><span className='font-bold'>{comment.data().username}</span>{comment.data().comment}</p>
         </div>
       )}
 
       {/* Input Box*/}
       {session && (
         <form className="flex items-center p-4">
-        <FaceSmileIcon className="h-7" />
-        <input
-          type="text"
-          value={comment}
-          onChange={e => setComment(e.target.value)}
-          placeholder="Add a comment..."
-          className="border-none flex-1 focus:ring-0 outline-none"
-        />
-        <button
-          type="submit"
-          disabled={!comment.trim()}
-          className="font-semibold text-blue-400"
-          onClick={sendComment}
-        >
-          Post
-        </button>
-      </form>
+          <FaceSmileIcon className="h-7" />
+          <input
+            type="text"
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+            placeholder="Add a comment..."
+            className="border-none flex-1 focus:ring-0 outline-none"
+          />
+          <button
+            type="submit"
+            disabled={!comment.trim()}
+            className="font-semibold text-blue-400"
+            onClick={sendComment}
+          >
+            Post
+          </button>
+        </form>
       )}
     </div>
   )
