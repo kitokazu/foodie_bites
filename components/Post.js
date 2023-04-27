@@ -8,7 +8,7 @@ import {
   BuildingStorefrontIcon,
 } from '@heroicons/react/24/outline'
 
-import Link from 'next/link';
+import Link from 'next/link'
 
 import StarRating from './StarRating'
 import Image from 'next/image'
@@ -182,7 +182,6 @@ function Post({
           <Link href="https://cortinasitalianfood.com/">
             <BuildingStorefrontIcon className="btn" />
           </Link>
-          
         </div>
       )}
 

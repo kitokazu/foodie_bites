@@ -63,7 +63,7 @@ function Header() {
         <div className="flex dark:text-black items-center justify-end space-x-4">
           <HomeIcon
             className="navBtn"
-            onClick={() => router.push('/menuPage')}
+            onClick={() => router.push('/homePage')}
           />
 
           {session ? (
