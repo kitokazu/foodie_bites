@@ -3,9 +3,38 @@ import { Cog6ToothIcon } from '@heroicons/react/24/outline'
 import profilePic from '../images/profile.png'
 import { useRouter } from 'next/router'
 import { signIn, signOut, useSession } from 'next-auth/react'
+import { useState, useEffect, use } from 'react'
+import {
+  collection,
+  query,
+  onSnapshot,
+  orderBy,
+  where,
+} from '@firebase/firestore'
+import { db } from '../firebase'
+import Moment from 'react-moment'
 
-function ProfileSidebar() {
+function ProfileSidebar(reviews) {
   const { data: session } = useSession()
+  const [posts, setPosts] = useState([])
+
+  useEffect(() => {
+    // Using snapshot listener from firebase
+    if (session) {
+      onSnapshot(
+        query(
+          collection(db, 'posts'),
+          where('username', '==', session.user.username)
+        ),
+        orderBy('timestamp', 'desc'),
+
+        (snapshot) => {
+          setPosts(snapshot.docs)
+        }
+      )
+      console.log('IN SESSION')
+    }
+  }, [db, session])
 
   return (
     <div class="w-1/4 bg-gray-200 h-screen">
@@ -26,7 +55,8 @@ function ProfileSidebar() {
           <div className="mt-1 flex flex-col">
             <div className="text-yellow-600">Active Foodie</div>
             <div className="mt-4">
-              Reviews: <span className="font-semibold ml-1">4</span>
+              Reviews:{' '}
+              <span className="font-semibold ml-1">{posts.length}</span>
             </div>
             <div className="mt-4">
               Favorite Places: <span className="font-semibold ml-1">Canes</span>
