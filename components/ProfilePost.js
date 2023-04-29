@@ -20,13 +20,13 @@ import { EllipsisHorizontalIcon } from '@heroicons/react/24/solid'
 
 import StarRating from './StarRating'
 
-export default function ProfileSidebar() {
+export default function ProfilePost({ username, image }) {
   const { data: session } = useSession()
   const [posts, setPosts] = useState([])
 
   useEffect(() => {
     // Using snapshot listener from firebase
-    if (session) {
+    if (session && !username) {
       onSnapshot(
         query(
           collection(db, 'posts'),
@@ -38,7 +38,15 @@ export default function ProfileSidebar() {
           setPosts(snapshot.docs)
         }
       )
-      console.log('IN SESSION')
+    } else {
+      onSnapshot(
+        query(collection(db, 'posts'), where('username', '==', username)),
+        orderBy('timestamp', 'desc'),
+
+        (snapshot) => {
+          setPosts(snapshot.docs)
+        }
+      )
     }
   }, [db, session])
 

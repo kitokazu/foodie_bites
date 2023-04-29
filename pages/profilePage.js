@@ -8,7 +8,7 @@ import Profile from '@/components/Profile'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function profilePage() {
+function profilePage({ name, image }) {
   return (
     <>
       <Head>
@@ -18,7 +18,20 @@ export default function profilePage() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <Profile />
+      <Profile user={name} image={image} />
     </>
   )
 }
+
+export async function getServerSideProps(context) {
+  const { query } = context
+  const { name, image } = query
+  return {
+    props: {
+      name: name || null,
+      image: image || null,
+    },
+  }
+}
+
+export default profilePage

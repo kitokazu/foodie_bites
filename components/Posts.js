@@ -49,7 +49,7 @@ function Posts() {
       {posts.map((post) => {
         const date = post.data().timestamp?.toDate().toString()
 
-        console.log(post.data().timestamp?.toDate().toString())
+        // console.log(post.data().timestamp?.toDate().toString())
         return (
           <Post
             key={post.id}
@@ -61,6 +61,7 @@ function Posts() {
             rating={post.data().rating}
             restaurant={post.data().restaurant}
             review={post.data().review}
+            location={post.data().location}
             date={<Moment fromNow>{date}</Moment>}
           />
         )

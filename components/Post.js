@@ -13,6 +13,7 @@ import Link from 'next/link'
 import StarRating from './StarRating'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 import {
   addDoc,
   collection,
@@ -37,6 +38,7 @@ function Post({
   link,
   review,
   date,
+  location,
 }) {
   const apiKey = process.env.GOOGLE_PLACES_API_KEY
   const radius = 1000 // Radius of the search area in meters
@@ -49,6 +51,7 @@ function Post({
   const [comments, setComments] = useState([])
   const [likes, setLikes] = useState([])
   const [hasLiked, setHasLiked] = useState(false)
+  const router = useRouter()
 
   useEffect(
     () =>
@@ -92,6 +95,13 @@ function Post({
       username: session.user.username,
       userImage: session.user.image,
       timeStamp: serverTimestamp(),
+    })
+  }
+
+  const handleClick = () => {
+    router.push({
+      pathname: '/profilePage',
+      query: { name: username, image: userImg },
     })
   }
 
@@ -148,8 +158,17 @@ function Post({
           className="h-16 w-16 rounded-full object-contain
                     border p-1 mr-3"
         />
-        <p className="flex-1 font-bold">{username}</p>
-        <p className="flex-1 font-bold text-xl"> {restaurant}</p>
+        <p
+          className="flex-1 font-bold cursor-pointer transition-colors duration-200 hover:text-blue-500 hover:underline"
+          onClick={handleClick}
+        >
+          {username}
+        </p>
+        <div className="flex-1 mr-16 text-center">
+          <p className="font-bold text-xl"> {restaurant}</p>
+          <p className="">{location}</p>
+        </div>
+
         <div>
           <StarRating rating={rating} />
           <p className="text-end mt-1">{date}</p>

@@ -13,12 +13,13 @@ import { Cog6ToothIcon } from '@heroicons/react/24/outline'
 import ProfileSidebar from './ProfileSidebar'
 import ProfilePost from './ProfilePost'
 
-function ProfilePage() {
+function ProfilePage({ user, image }) {
+  console.log(user)
   return (
     <div class="flex">
-      <ProfileSidebar />
+      <ProfileSidebar username={user} image={image} />
       <div className="flex flex-wrap items-center justify-center h-full w-3/4 mt-5 gap-20">
-        <ProfilePost />
+        <ProfilePost username={user} image={image} />
       </div>
     </div>
   )
