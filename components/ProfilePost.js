@@ -19,6 +19,7 @@ import Moment from 'react-moment'
 import { EllipsisHorizontalIcon } from '@heroicons/react/24/solid'
 
 import StarRating from './StarRating'
+import { useAnimationFrame } from 'framer-motion'
 
 export default function ProfilePost({ username, image }) {
   const { data: session } = useSession()
@@ -48,7 +49,7 @@ export default function ProfilePost({ username, image }) {
         }
       )
     }
-  }, [db, session])
+  }, [db, session, username])
 
   const sortPosts = (posts) => {
     // Sort the posts by the timestamp and setPosts

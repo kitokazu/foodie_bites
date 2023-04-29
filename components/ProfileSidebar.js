@@ -44,7 +44,7 @@ function ProfileSidebar({ username, image }) {
         }
       )
     }
-  }, [db, session])
+  }, [db, session, username])
 
   return (
     <div className="w-1/4 bg-gray-200 h-screen">
