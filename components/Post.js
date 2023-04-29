@@ -105,6 +105,13 @@ function Post({
     })
   }
 
+  const handleCommentClick = (commentUsername, commentImage) => {
+    router.push({
+      pathname: '/profilePage',
+      query: { name: commentUsername, image: commentImage },
+    })
+  }
+
   /*var axios = require('axios');
 
   fetch(url)
@@ -209,7 +216,12 @@ function Post({
         {likes.length > 0 && (
           <p className="font-bold mb-1">{likes.length} likes</p>
         )}
-        <span className="font-bold mr-1">{username}</span>
+        <span
+          className="font-bold mr-1 cursor-pointer transition-colors duration-200 hover:text-blue-500 hover:underline"
+          onClick={handleClick}
+        >
+          {username}
+        </span>
         {review}
       </p>
       {/* Comments */}
@@ -223,7 +235,17 @@ function Post({
                 alt=""
               />
               <p className="text-sm flex-1">
-                <span className="font-bold">{comment.data().username}</span>{' '}
+                <span
+                  className="font-bold cursor-pointer transition-colors duration-200 hover:text-blue-500 hover:underline"
+                  onClick={() =>
+                    handleCommentClick(
+                      comment.data().username,
+                      comment.data().userImage
+                    )
+                  }
+                >
+                  {comment.data().username}
+                </span>{' '}
                 {comment.data().comment}
               </p>
 
