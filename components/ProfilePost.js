@@ -21,6 +21,51 @@ import { EllipsisHorizontalIcon } from '@heroicons/react/24/solid'
 import StarRating from './StarRating'
 import { useAnimationFrame } from 'framer-motion'
 
+import amazing from '../public/images/amazing.png'
+import awful from '../public/images/awful.png'
+import meh from '../public/images/meh.png'
+import okay from '../public/images/okay.png'
+import great from '../public/images/great.png'
+
+const reviewImage = {
+  0: awful,
+  1: awful,
+  2: meh,
+  3: okay,
+  4: great,
+  5: amazing,
+}
+
+const reviewColor = (rating) => {
+  if (rating == 1 || rating == 0) {
+    return 'text-awful'
+  } else if (rating == 2) {
+    return 'text-meh'
+  } else if (rating == 3) {
+    return 'text-okay'
+  } else if (rating == 4) {
+    return 'text-great'
+  } else if (rating == 5) {
+    return 'text-amazing'
+  }
+  return 'text-gray-500'
+}
+
+const reviewTitle = (rating) => {
+  if (rating == 1 || rating == 0) {
+    return 'AWFUL'
+  } else if (rating == 2) {
+    return 'MEH'
+  } else if (rating == 3) {
+    return 'OKAY'
+  } else if (rating == 4) {
+    return 'GREAT'
+  } else if (rating == 5) {
+    return 'AMAZING'
+  }
+  return 'N/A'
+}
+
 export default function ProfilePost({ username, image }) {
   const { data: session } = useSession()
   const [posts, setPosts] = useState([])
@@ -87,12 +132,24 @@ export default function ProfilePost({ username, image }) {
                 >
                   {post.data().restaurant}
                 </a>
-              </div>
-              <div>
-                <StarRating rating={post.data().rating} />
                 <Moment format="MM/DD/YYYY" className="flex justify-end">
                   {date}
                 </Moment>
+              </div>
+              <div className="flex">
+                <p className={`text-4xl font-bold mt-7 ml-3  ${reviewColor()}`}>
+                  {reviewTitle()}
+                </p>
+                <div className="roudned-full w-16 h-16 overflow-hidden">
+                  {' '}
+                  <Image
+                    src={reviewImage[Math.floor(post.data().rating)]}
+                    width={500}
+                    height={500}
+                    alt="IMAGE NOT FOUND"
+                    className="object-cover w-full h-full "
+                  />
+                </div>
               </div>
             </div>
 
