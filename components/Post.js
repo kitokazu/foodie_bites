@@ -28,6 +28,14 @@ import {
 import { db } from '../firebase'
 import Moment from 'react-moment'
 
+import amazing from '../public/images/amazing.png'
+import awful from '../public/images/awful.png'
+import meh from '../public/images/meh.png'
+import okay from '../public/images/okay.png'
+import great from '../public/images/great.png'
+
+import vegan from '../public/images/vegan.png'
+
 function Post({
   id,
   username,
@@ -45,6 +53,8 @@ function Post({
   const type = 'restaurant' // Type of place to search for
 
   const newRating = rating + ''
+
+  const tags = ['vegan', 'cheap', 'fast-food']
 
   const { data: session } = useSession()
   const [comment, setComment] = useState('')
@@ -112,6 +122,45 @@ function Post({
     })
   }
 
+  const reviewColor = () => {
+    if (Math.floor(rating) == 1 || Math.floor(rating) == 0) {
+      return 'text-awful'
+    } else if (Math.floor(rating) == 2) {
+      return 'text-meh'
+    } else if (Math.floor(rating) == 3) {
+      return 'text-okay'
+    } else if (Math.floor(rating) == 4) {
+      return 'text-great'
+    } else if (Math.floor(rating) == 5) {
+      return 'text-amazing'
+    }
+    return 'text-gray-500'
+  }
+
+  const reviewTitle = () => {
+    if (Math.floor(rating) == 1 || Math.floor(rating) == 0) {
+      return 'AWFUL'
+    } else if (Math.floor(rating) == 2) {
+      return 'MEH'
+    } else if (Math.floor(rating) == 3) {
+      return 'OKAY'
+    } else if (Math.floor(rating) == 4) {
+      return 'GREAT'
+    } else if (Math.floor(rating) == 5) {
+      return 'AMAZING'
+    }
+    return 'N/A'
+  }
+
+  const reviewImage = {
+    0: awful,
+    1: awful,
+    2: meh,
+    3: okay,
+    4: great,
+    5: amazing,
+  }
+
   /*var axios = require('axios');
 
   fetch(url)
@@ -150,6 +199,7 @@ function Post({
     });
   });
 } */
+
   return (
     <div
       className="bg-white my-7 border
@@ -157,39 +207,88 @@ function Post({
     >
       {/* Header */}
       <div className="flex items-center p-5">
-        <Image
-          src={userImg}
-          width={500}
-          height={500}
-          alt=""
-          className="h-16 w-16 rounded-full object-contain
-                    border p-1 mr-3"
-        />
         <p
-          className="flex-1 font-bold cursor-pointer transition-colors duration-200 hover:text-blue-500 hover:underline"
+          className={`text-5xl ml-3 font-sans font-bold uppercase post ${reviewColor()}`}
+        >
+          {restaurant}
+        </p>
+        <div className="flex-1"></div>
+        <div className="text-start mr-10 mt-2">
+          <p className="text-xl font-sans custom-gray font-bold">{location}</p>
+        </div>
+      </div>
+
+      {/* Body 1 */}
+      <div className="flex">
+        {/* Image */}
+        <div className="ml-12 rounded-xl w-64 h-80 overflow-hidden">
+          <Image
+            src={img}
+            width={500}
+            height={500}
+            alt="IMAGE NOT FOUND"
+            className="object-cover w-full h-full"
+          />
+        </div>
+
+        {/* Right side of the body */}
+        <div>
+          <div className="items-center ml-5">
+            {/* TAGS */}
+            <div className="flex">
+              {tags.map((tag) => (
+                <div className="flex ml-3">
+                  <div class="h-2 w-2 mt-2 rounded-full bg-custom-gray"></div>
+                  <p className="font-bold ml-1 custom-gray">{tag}</p>
+                  <div className="rounded-full ml-1 w-6 h-6 overflow-hidden">
+                    <Image
+                      src={vegan}
+                      width={500}
+                      height={500}
+                      alt="IMAGE NOT FOUND"
+                      className="object-cover w-full h-full"
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* RATING */}
+            <div className="flex mt-5">
+              <div className="rounded-full w-24 h-24 overflow-hidden">
+                <Image
+                  src={reviewImage[Math.floor(rating)]}
+                  width={500}
+                  height={500}
+                  alt="IMAGE NOT FOUND"
+                  className="object-cover w-full h-full "
+                />
+              </div>
+              <p className={`text-4xl font-bold mt-7 ml-3  ${reviewColor()}`}>
+                {reviewTitle()}
+              </p>
+            </div>
+
+            {/* REVIEW */}
+            <p className="mt-10">"{review}"</p>
+          </div>
+        </div>
+      </div>
+
+      {/* BODY 2 */}
+      <div className="flex items-center p-5">
+        <p
+          className="text-xl font-sans font-bold uppercase post custom-gray cursor-pointer transition-colors duration-200 hover:text-blue-500 hover:underline"
           onClick={handleClick}
         >
           {username}
         </p>
-        <div className="flex-1 mr-16 text-center">
-          <p className="font-bold text-xl"> {restaurant}</p>
-          <p className="">{location}</p>
-        </div>
-
-        <div>
-          <StarRating rating={rating} />
-          <p className="text-end mt-1">{date}</p>
+        <div className="flex-1"></div>
+        <div className="text-start">
+          <p className="text-xl font-sans custom-gray font-bold">{date}</p>
         </div>
       </div>
 
-      {/* Image */}
-      <Image
-        src={img}
-        width={500}
-        height={500}
-        alt="IMAGE NOT FOUND"
-        className="object-cover w-full h-full"
-      />
       {/* Buttons */}
       {session && (
         <div className="flex justify-between pt-4 px-4 pb-1">
@@ -202,8 +301,6 @@ function Post({
             ) : (
               <HeartIcon onClick={likePost} className="btn" />
             )}
-
-            <ChatBubbleBottomCenterTextIcon className="btn" />
           </div>
           <Link href="https://cortinasitalianfood.com/">
             <BuildingStorefrontIcon className="btn" />
@@ -214,15 +311,10 @@ function Post({
       {/* Caption */}
       <p className="mt-2 ml-5 truncate">
         {likes.length > 0 && (
-          <p className="font-bold mb-1">{likes.length} likes</p>
+          <p className="font-bold mb-1 text-xl font-sans custom-gray">
+            {likes.length} likes
+          </p>
         )}
-        <span
-          className="font-bold mr-1 cursor-pointer transition-colors duration-200 hover:text-blue-500 hover:underline"
-          onClick={handleClick}
-        >
-          {username}
-        </span>
-        {review}
       </p>
       {/* Comments */}
       {comments.length > 0 && (
@@ -236,7 +328,7 @@ function Post({
               />
               <p className="text-sm flex-1">
                 <span
-                  className="font-bold cursor-pointer transition-colors duration-200 hover:text-blue-500 hover:underline"
+                  className="text-xl font-sans font-bold custom-gray cursor-pointer transition-colors duration-200 hover:text-blue-500 hover:underline"
                   onClick={() =>
                     handleCommentClick(
                       comment.data().username,
