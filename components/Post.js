@@ -27,6 +27,7 @@ import {
 } from 'firebase/firestore'
 import { db } from '../firebase'
 import Moment from 'react-moment'
+import PostTags from './PostTags'
 
 import amazing from '../public/images/amazing.png'
 import awful from '../public/images/awful.png'
@@ -34,7 +35,11 @@ import meh from '../public/images/meh.png'
 import okay from '../public/images/okay.png'
 import great from '../public/images/great.png'
 
-import vegan from '../public/images/vegan.png'
+import vegan_amazing from '../public/images/vegan_amazing.png'
+import vegan_great from '../public/images/vegan_great.png'
+import vegan_okay from '../public/images/vegan_okay.png'
+import vegan_meh from '../public/images/vegan_meh.png'
+import vegan_awful from '../public/images/vegan_awful.png'
 
 function Post({
   id,
@@ -50,11 +55,7 @@ function Post({
 }) {
   const apiKey = process.env.GOOGLE_PLACES_API_KEY
   const radius = 1000 // Radius of the search area in meters
-  const type = 'restaurant' // Type of place to search for
-
-  const newRating = rating + ''
-
-  const tags = ['vegan', 'cheap', 'fast-food']
+  // const type = 'restaurant' // Type of place to search for
 
   const { data: session } = useSession()
   const [comment, setComment] = useState('')
@@ -235,23 +236,7 @@ function Post({
         <div>
           <div className="items-center ml-5">
             {/* TAGS */}
-            <div className="flex">
-              {tags.map((tag) => (
-                <div className="flex ml-3">
-                  <div class="h-2 w-2 mt-2 rounded-full bg-custom-gray"></div>
-                  <p className="font-bold ml-1 custom-gray">{tag}</p>
-                  <div className="rounded-full ml-1 w-6 h-6 overflow-hidden">
-                    <Image
-                      src={vegan}
-                      width={500}
-                      height={500}
-                      alt="IMAGE NOT FOUND"
-                      className="object-cover w-full h-full"
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
+            <PostTags rating={Math.floor(rating)} />
 
             {/* RATING */}
             <div className="flex mt-5">
