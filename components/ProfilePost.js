@@ -137,8 +137,12 @@ export default function ProfilePost({ username, image }) {
                 </Moment>
               </div>
               <div className="flex">
-                <p className={`text-4xl font-bold mt-7 ml-3  ${reviewColor()}`}>
-                  {reviewTitle()}
+                <p
+                  className={`text-3xl font-bold mt-3 mr-3  ${reviewColor(
+                    Math.floor(post.data().rating)
+                  )}`}
+                >
+                  {reviewTitle(Math.floor(post.data().rating))}
                 </p>
                 <div className="roudned-full w-16 h-16 overflow-hidden">
                   {' '}
