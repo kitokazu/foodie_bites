@@ -97,26 +97,14 @@ export default function ProfilePost({ username, image }) {
   }, [db, session, username])
 
   const sortPosts = (posts) => {
-    // Sort the posts by the timestamp and setPosts
-    setPosts(
-      posts.sort((a, b) => {
-        return (
-          b.data().timestamp?.toDate().getTime() -
-          a.data().timestamp?.toDate().getTime()
-        )
-      })
+    return posts.sort(
+      (a, b) => b.data().timestamp?.toDate() - a.data().timestamp?.toDate()
     )
   }
 
-  // Sorting the posts by the Timestamp
-  useEffect(() => {
-    sortPosts(posts)
-    console.log(posts)
-  })
-
   return (
     <>
-      {posts.map((post) => {
+      {sortPosts(posts).map((post) => {
         const date = post.data().timestamp?.toDate().toString()
         return (
           <div
@@ -132,7 +120,7 @@ export default function ProfilePost({ username, image }) {
                 >
                   {post.data().restaurant}
                 </a>
-                <Moment format="MM/DD/YYYY" className="flex justify-end">
+                <Moment format="MM/DD/YYYY" className="flex">
                   {date}
                 </Moment>
               </div>

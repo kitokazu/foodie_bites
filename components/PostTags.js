@@ -63,7 +63,7 @@ function PostTags({ rating }) {
     <div className="flex">
       {tags.map((tag) => (
         <div className="flex ml-3">
-          <div class="h-2 w-2 mt-2 rounded-full bg-custom-gray"></div>
+          <div className="h-2 w-2 mt-2 rounded-full bg-custom-gray"></div>
           <p className="font-bold ml-1 custom-gray">{tag}</p>
           <div className="rounded-full ml-1 w-6 h-6 overflow-hidden">
             <Image

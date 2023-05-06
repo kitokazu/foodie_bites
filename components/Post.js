@@ -294,13 +294,13 @@ function Post({
       )}
 
       {/* Caption */}
-      <p className="mt-2 ml-5 truncate">
+      <div className="mt-2 ml-5 truncate">
         {likes.length > 0 && (
           <p className="font-bold mb-1 text-xl font-sans custom-gray">
             {likes.length} likes
           </p>
         )}
-      </p>
+      </div>
       <hr />
       {/* Comments */}
       {comments.length > 0 && (
