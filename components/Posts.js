@@ -25,28 +25,23 @@ function Posts() {
   // )
 
   const sortPosts = (posts) => {
-    // Sort the posts by the timestamp and setPosts
-    setPosts(
-      posts.sort((a, b) => {
-        return (
-          b.data().timestamp?.toDate().getTime() -
-          a.data().timestamp?.toDate().getTime()
-        )
-      })
+    return posts.sort(
+      (a, b) => b.data().timestamp.toDate() - a.data().timestamp.toDate()
     )
   }
 
   // Sorting the posts by the Timestamp
+
   useEffect(() => {
-    sortPosts(posts)
     console.log(posts)
+    sortPosts(posts)
   })
 
   // date={(post.data().timestamp).map((timestamp) => timestamp.toDate())}
 
   return (
     <div>
-      {posts.map((post) => {
+      {sortPosts(posts).map((post) => {
         const date = post.data().timestamp?.toDate().toString()
 
         // console.log(post.data().timestamp?.toDate().toString())

@@ -53,10 +53,9 @@ function Modal() {
   const ratingRef = useRef(null)
   const reviewRef = useRef(null)
 
-  console.log(restaurantRef)
-
   // Function for uploading post
   const [loading, setLoading] = useState(false)
+
   const uploadPost = async () => {
     if (loading) return
 
