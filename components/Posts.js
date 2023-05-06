@@ -26,16 +26,16 @@ function Posts() {
 
   const sortPosts = (posts) => {
     return posts.sort(
-      (a, b) => b.data().timestamp.toDate() - a.data().timestamp.toDate()
+      (a, b) => b.data().timestamp?.toDate() - a.data().timestamp?.toDate()
     )
   }
 
   // Sorting the posts by the Timestamp
 
-  useEffect(() => {
-    console.log(posts)
-    sortPosts(posts)
-  })
+  // useEffect(() => {
+  //   console.log(posts)
+  //   sortPosts(posts)
+  // })
 
   // date={(post.data().timestamp).map((timestamp) => timestamp.toDate())}
 
