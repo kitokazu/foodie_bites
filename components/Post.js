@@ -262,6 +262,14 @@ function Post({
 
       {/* BODY 2 */}
       <div className="flex items-center p-5">
+        <Image
+          src={userImg}
+          width={500}
+          height={500}
+          alt=""
+          className="h-12 w-12 rounded-full object-contain
+                    border p-1 mr-3"
+        />
         <p
           className="text-xl font-sans font-bold uppercase post custom-gray cursor-pointer transition-colors duration-200 hover:text-blue-500 hover:underline"
           onClick={handleClick}
@@ -301,6 +309,7 @@ function Post({
           </p>
         )}
       </div>
+
       <hr />
       {/* Comments */}
       {comments.length > 0 && (

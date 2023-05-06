@@ -18,8 +18,6 @@ function ProfileSidebar({ username, image }) {
   const { data: session } = useSession()
   const [posts, setPosts] = useState([])
 
-  console.log(username)
-
   useEffect(() => {
     // Using snapshot listener from firebase
     if (session && !username) {
