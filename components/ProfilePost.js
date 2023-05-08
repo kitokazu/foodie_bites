@@ -1,107 +1,14 @@
-import Image from 'next/image'
-import { Cog6ToothIcon } from '@heroicons/react/24/outline'
-import profilePic from '../images/headshot.jpeg'
-import { useRouter } from 'next/router'
-import { signIn, signOut, useSession } from 'next-auth/react'
+import React from 'react'
 
-import Post from './Post'
-import { useState, useEffect, use } from 'react'
-import {
-  collection,
-  query,
-  onSnapshot,
-  orderBy,
-  where,
-} from '@firebase/firestore'
-import { db } from '../firebase'
-import Moment from 'react-moment'
-
-import { EllipsisHorizontalIcon } from '@heroicons/react/24/solid'
-
-import StarRating from './StarRating'
-import { useAnimationFrame } from 'framer-motion'
-
-import amazing from '../public/images/amazing.png'
-import awful from '../public/images/awful.png'
-import meh from '../public/images/meh.png'
-import okay from '../public/images/okay.png'
-import great from '../public/images/great.png'
-
-const reviewImage = {
-  0: awful,
-  1: awful,
-  2: meh,
-  3: okay,
-  4: great,
-  5: amazing,
-}
-
-const reviewColor = (rating) => {
-  if (rating == 1 || rating == 0) {
-    return 'text-awful'
-  } else if (rating == 2) {
-    return 'text-meh'
-  } else if (rating == 3) {
-    return 'text-okay'
-  } else if (rating == 4) {
-    return 'text-great'
-  } else if (rating == 5) {
-    return 'text-amazing'
-  }
-  return 'text-gray-500'
-}
-
-const reviewTitle = (rating) => {
-  if (rating == 1 || rating == 0) {
-    return 'AWFUL'
-  } else if (rating == 2) {
-    return 'MEH'
-  } else if (rating == 3) {
-    return 'OKAY'
-  } else if (rating == 4) {
-    return 'GREAT'
-  } else if (rating == 5) {
-    return 'AMAZING'
-  }
-  return 'N/A'
-}
-
-export default function ProfilePost({ username, image }) {
-  const { data: session } = useSession()
-  const [posts, setPosts] = useState([])
-
-  useEffect(() => {
-    // Using snapshot listener from firebase
-    if (session && !username) {
-      onSnapshot(
-        query(
-          collection(db, 'posts'),
-          where('username', '==', session.user.username)
-        ),
-        orderBy('timestamp', 'desc'),
-
-        (snapshot) => {
-          setPosts(snapshot.docs)
-        }
-      )
-    } else {
-      onSnapshot(
-        query(collection(db, 'posts'), where('username', '==', username)),
-        orderBy('timestamp', 'desc'),
-
-        (snapshot) => {
-          setPosts(snapshot.docs)
-        }
-      )
-    }
-  }, [db, session, username])
-
-  const sortPosts = (posts) => {
-    return posts.sort(
-      (a, b) => b.data().timestamp?.toDate() - a.data().timestamp?.toDate()
-    )
-  }
-
+export default function ProfilePost({
+  id,
+  img,
+  restaurant,
+  rating,
+  link,
+  date,
+  location,
+}) {
   return (
     <>
       {sortPosts(posts).map((post) => {
@@ -109,7 +16,7 @@ export default function ProfilePost({ username, image }) {
         return (
           <div
             key={post.id}
-            className="relative m-2 w-1/3 h-96 shadow border-solid border-2 overflow-hidden"
+            className="relative m-2 w-1/3 shadow border-solid border-2 overflow-hidden"
           >
             {/* Header */}
             <div className="flex justify-between p-5 ">
@@ -152,8 +59,17 @@ export default function ProfilePost({ username, image }) {
               width={500}
               height={500}
               alt={`post ${post.id}`}
-              className="w-full h-full object-cover cursor-pointer"
+              className="w-full h-72 overflow-hidden object-cover cursor-pointer"
             />
+            {/* Buttons */}
+            <div className="flex justify-between items-center rounded-b-lg text-xl p-2">
+              <div className="flex items-center">
+                <HeartIcon className="h-7 mr-1" />
+                <p className="mr-3">{7}</p>
+                <ChatBubbleBottomCenterIcon className="h-7 mr-1" />
+                <p className="mr-3">{7}</p>
+              </div>
+            </div>
           </div>
         )
       })}
