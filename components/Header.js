@@ -2,13 +2,13 @@ import Image from 'next/image'
 import McDonalds_Long from '../images/mcdonalds_long.jpeg'
 import McDonalds from '../images/mcdonalds_logo.png'
 import {
-  MagnifyingGlassIcon,
   HomeIcon,
   UserCircleIcon,
   Bars3Icon,
   EnvelopeIcon,
   ShoppingCartIcon,
   PlusCircleIcon,
+  MagnifyingGlassIcon,
 } from '@heroicons/react/24/outline'
 
 import { useRouter } from 'next/router'
@@ -72,6 +72,10 @@ function Header() {
                 className="navBtn"
                 onClick={() => setOpen(true)}
               />
+              <MagnifyingGlassIcon
+                className="navBtn"
+                onClick={() => router.push('/explorePage')}
+              />
               {/* <div className="relative navBtn">
                 <EnvelopeIcon
                   className="navBtn"
@@ -81,6 +85,7 @@ function Header() {
                   3
                 </div>
               </div> */}
+
               <Bars3Icon className="h-6 md:hidden cursor-pointer" />
               <Image
                 onClick={() => router.push('/profilePage')}
