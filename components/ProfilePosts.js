@@ -7,6 +7,7 @@ import {
 import profilePic from '../images/headshot.jpeg'
 import { useRouter } from 'next/router'
 import { signIn, signOut, useSession } from 'next-auth/react'
+import Select from 'react-select'
 
 import Post from './Post'
 import { useState, useEffect, use } from 'react'
@@ -108,6 +109,10 @@ export default function ProfilePosts({ username, image }) {
 
   return (
     <div>
+      <div className="flex justify-end">
+        <p className="text-end mr-5 mt-1">Sort by :</p>
+        <Select className="mr-10" />
+      </div>
       {sortPosts(posts).map((post) => {
         const date = post.data().timestamp?.toDate().toString()
 
