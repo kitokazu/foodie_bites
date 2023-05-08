@@ -72,7 +72,7 @@ function Header() {
                 className="navBtn"
                 onClick={() => setOpen(true)}
               />
-              <div className="relative navBtn">
+              {/* <div className="relative navBtn">
                 <EnvelopeIcon
                   className="navBtn"
                   onClick={() => router.push('/messagePage')}
@@ -80,7 +80,7 @@ function Header() {
                 <div className="absolute -top-2 -right-2 text-s w-5 h-5 bg-red-500 rounded-full flex items-center justify-center animate-pulse text-white">
                   3
                 </div>
-              </div>
+              </div> */}
               <Bars3Icon className="h-6 md:hidden cursor-pointer" />
               <Image
                 onClick={() => router.push('/profilePage')}

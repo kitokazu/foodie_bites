@@ -17,7 +17,13 @@ import { ref, getDownloadURL, uploadString } from '@firebase/storage'
 import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 
-function Modal() {
+import amazing from '../public/images/amazing.png'
+import awful from '../public/images/awful.png'
+import meh from '../public/images/meh.png'
+import okay from '../public/images/okay.png'
+import great from '../public/images/great.png'
+
+export default function Modal() {
   // Session Data
   const { data: session } = useSession()
 
@@ -136,30 +142,110 @@ function Modal() {
             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
-            <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow:hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6">
+            <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow:hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
               <div>
                 <div>
-                  <a className="text-xl font-bold">Create Review</a>
+                  <a className="text-2xl font-bold">Share a bite...</a>
+                  {/* Uploading Photo */}
+                  <Dialog.Title as="h3" className="mt-5 leading-6 font-bold">
+                    Upload Picture
+                  </Dialog.Title>
+
+                  {/* If a picture is not selected then render the camera icon */}
+                  {selectedFile ? (
+                    <Image
+                      src={selectedFile}
+                      width={100}
+                      height={100}
+                      className="float-left object-contain cursor-pointer"
+                      onClick={() => setSelectedFile(null)}
+                      alt=""
+                    />
+                  ) : (
+                    <div
+                      onClick={() => filePickerRef.current.click()}
+                      className="mt-2 flex items-start justify-start h-16 w-16 rounded-lg bg-gray-200 cursor-pointer"
+                    >
+                      <CameraIcon className="mt-2 ml-2 h-12 w-12 text-red-600" />
+                    </div>
+                  )}
+
+                  <div>
+                    <input
+                      ref={filePickerRef}
+                      type="file"
+                      hidden
+                      onChange={addImageToPost}
+                    />
+                  </div>
 
                   <div className="mt-3 flex flex-col sm:mt-5">
-                    {/* Name of the place */}
-                    <div className="grid grid-cols-2">
-                      <div className="">Restaurant: </div>
-                      <input
-                        className="border ml-2 focus:ring-0 w-full"
-                        type="text"
-                        ref={restaurantRef}
-                      />
+                    <div className="flex">
+                      {/* Name of the place */}
+                      <div>
+                        {' '}
+                        <p className="font-bold">Restaurant</p>
+                        <input
+                          className="mt-1 focus:ring-0 w-48 h-10 rounded-lg bg-gray-100"
+                          type="text"
+                          ref={restaurantRef}
+                        />
+                      </div>
+                      {/* Location */}
+                      <div className="ml-10">
+                        {' '}
+                        <p className="font-bold">Location: </p>
+                        <input
+                          className="mt-1 focus:ring-0 w-48 h-10 rounded-lg bg-gray-100"
+                          type="text"
+                          ref={locationRef}
+                        />
+                      </div>
                     </div>
-                    {/* Location */}
-                    <div className="grid grid-cols-2 mt-4">
-                      <div className="">Location: </div>
-                      <input
-                        className="border ml-2 focus:ring-0 w-full"
-                        type="text"
-                        ref={locationRef}
-                      />
+
+                    {/* Rating */}
+                    <div className="mt-4">
+                      <p className="font-bold">Rating</p>
+                      <div className="flex gap-5 justify-center">
+                        {' '}
+                        <Image
+                          src={amazing}
+                          width={500}
+                          height={500}
+                          alt="IMAGE NOT FOUND"
+                          className="mt-1 object-cover w-16 h-16"
+                        />
+                        <Image
+                          src={great}
+                          width={500}
+                          height={500}
+                          alt="IMAGE NOT FOUND"
+                          className="mt-1 object-cover w-16 h-16"
+                        />
+                        <Image
+                          src={okay}
+                          width={500}
+                          height={500}
+                          alt="IMAGE NOT FOUND"
+                          className="mt-1 object-cover w-16 h-16"
+                        />
+                        <Image
+                          src={meh}
+                          width={500}
+                          height={500}
+                          alt="IMAGE NOT FOUND"
+                          className="mt-1 object-cover w-16 h-16"
+                        />
+                        <Image
+                          src={awful}
+                          width={500}
+                          height={500}
+                          alt="IMAGE NOT FOUND"
+                          className="mt-1 object-cover w-16 h-16"
+                        />
+                      </div>
                     </div>
+
                     {/* Link */}
                     <div className="grid grid-cols-2 mt-4">
                       <div className="">Link: </div>
@@ -185,6 +271,7 @@ function Modal() {
                         <option value={5}>5</option>
                       </select>
                     </div>
+
                     {/* Review */}
                     <div className="grid grid-cols-2 mt-4">
                       <div className="">Review: </div>
@@ -193,39 +280,6 @@ function Modal() {
                         type="text"
                         rows="4"
                         ref={reviewRef}
-                      />
-                    </div>
-
-                    {/* Uploading Photo */}
-                    <Dialog.Title as="h3" className="mt-5 leading-6">
-                      Upload Picture:
-                    </Dialog.Title>
-
-                    {/* If a picture is not selected then render the camera icon */}
-                    {selectedFile ? (
-                      <Image
-                        src={selectedFile}
-                        width={100}
-                        height={100}
-                        className="w-full object-contain cursor-pointer"
-                        onClick={() => setSelectedFile(null)}
-                        alt=""
-                      />
-                    ) : (
-                      <div
-                        onClick={() => filePickerRef.current.click()}
-                        className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100 cursor-pointer"
-                      >
-                        <CameraIcon className="h-6 w-6 text-red-600" />
-                      </div>
-                    )}
-
-                    <div>
-                      <input
-                        ref={filePickerRef}
-                        type="file"
-                        hidden
-                        onChange={addImageToPost}
                       />
                     </div>
                   </div>
@@ -248,5 +302,3 @@ function Modal() {
     </Transition.Root>
   )
 }
-
-export default Modal
