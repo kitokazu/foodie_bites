@@ -31,9 +31,15 @@ export default function Modal() {
   const [open, setOpen] = useRecoilState(modalState)
 
   // state for rating
-  const [rating, setRating] = useState(0)
-  const handleRatingChange = (event) => {
-    setRating(parseFloat(event.target.value))
+  const [rating, setRating] = useState(null)
+
+  // const handleRatingChange = (event) => {
+  //   setRating(parseFloat(event.target.value))
+  // }
+
+  const handleRatingChange = (rating) => {
+    setRating(rating)
+    ratingRef.current = rating
   }
 
   // useRef hook for file picking
@@ -80,7 +86,7 @@ export default function Modal() {
       restaurant: restaurantRef.current.value,
       location: locationRef.current.value,
       link: linkRef.current.value,
-      rating: ratingRef.current.value,
+      rating: ratingRef.current,
       review: reviewRef.current.value,
 
       //use the servers timezone
@@ -157,7 +163,7 @@ export default function Modal() {
                       src={selectedFile}
                       width={100}
                       height={100}
-                      className="float-left object-contain cursor-pointer"
+                      className="w-40 object-contain cursor-pointer"
                       onClick={() => setSelectedFile(null)}
                       alt=""
                     />
@@ -206,70 +212,63 @@ export default function Modal() {
                     {/* Rating */}
                     <div className="mt-4">
                       <p className="font-bold">Rating</p>
-                      <div className="flex gap-5 justify-center">
-                        {' '}
-                        <Image
-                          src={amazing}
-                          width={500}
-                          height={500}
-                          alt="IMAGE NOT FOUND"
-                          className="mt-1 object-cover w-16 h-16"
-                        />
-                        <Image
-                          src={great}
-                          width={500}
-                          height={500}
-                          alt="IMAGE NOT FOUND"
-                          className="mt-1 object-cover w-16 h-16"
-                        />
-                        <Image
-                          src={okay}
-                          width={500}
-                          height={500}
-                          alt="IMAGE NOT FOUND"
-                          className="mt-1 object-cover w-16 h-16"
-                        />
-                        <Image
-                          src={meh}
-                          width={500}
-                          height={500}
-                          alt="IMAGE NOT FOUND"
-                          className="mt-1 object-cover w-16 h-16"
-                        />
-                        <Image
-                          src={awful}
-                          width={500}
-                          height={500}
-                          alt="IMAGE NOT FOUND"
-                          className="mt-1 object-cover w-16 h-16"
-                        />
+                      <div className="flex gap-6 justify-center">
+                        <button onClick={() => handleRatingChange(5)}>
+                          <Image
+                            src={amazing}
+                            width={500}
+                            height={500}
+                            alt="IMAGE NOT FOUND"
+                            className={`mt-1 object-cover w-16 h-16 ${
+                              rating === 5 ? 'border-2 border-blue-500' : ''
+                            }`}
+                          />
+                        </button>
+                        <button onClick={() => handleRatingChange(4)}>
+                          <Image
+                            src={great}
+                            width={500}
+                            height={500}
+                            alt="IMAGE NOT FOUND"
+                            className={`mt-1 object-cover w-16 h-16 ${
+                              rating === 4 ? 'border-2 border-blue-500' : ''
+                            }`}
+                          />
+                        </button>
+                        <button onClick={() => handleRatingChange(3)}>
+                          <Image
+                            src={okay}
+                            width={500}
+                            height={500}
+                            alt="IMAGE NOT FOUND"
+                            className={`mt-1 object-cover w-16 h-16 ${
+                              rating === 3 ? 'border-2 border-blue-500' : ''
+                            }`}
+                          />
+                        </button>
+                        <button onClick={() => handleRatingChange(2)}>
+                          <Image
+                            src={meh}
+                            width={500}
+                            height={500}
+                            alt="IMAGE NOT FOUND"
+                            className={`mt-1 object-cover w-16 h-16 ${
+                              rating === 2 ? 'border-2 border-blue-500' : ''
+                            }`}
+                          />
+                        </button>
+                        <button onClick={() => handleRatingChange(1)}>
+                          <Image
+                            src={awful}
+                            width={500}
+                            height={500}
+                            alt="IMAGE NOT FOUND"
+                            className={`mt-1 object-cover w-16 h-16 ${
+                              rating === 1 ? 'border-2 border-blue-500' : ''
+                            }`}
+                          />
+                        </button>
                       </div>
-                    </div>
-
-                    {/* Link */}
-                    <div className="grid grid-cols-2 mt-4">
-                      <div className="">Link: </div>
-                      <input
-                        className="border ml-2 focus:ring-0 w-full"
-                        type="text"
-                        ref={linkRef}
-                      />
-                    </div>
-                    {/* Rating */}
-                    <div className="grid grid-cols-2 mt-4">
-                      <div className="">Rating: </div>
-                      <select
-                        className="ml-2 py-2 px-4 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                        value={rating}
-                        onChange={handleRatingChange}
-                        ref={ratingRef}
-                      >
-                        <option value={1}>1</option>
-                        <option value={2}>2</option>
-                        <option value={3}>3</option>
-                        <option value={4}>4</option>
-                        <option value={5}>5</option>
-                      </select>
                     </div>
 
                     {/* Review */}
@@ -282,6 +281,15 @@ export default function Modal() {
                         ref={reviewRef}
                       />
                     </div>
+                  </div>
+                  {/* Link */}
+                  <div className="grid grid-cols-2 mt-4">
+                    <div className="">Link: </div>
+                    <input
+                      className="border ml-2 focus:ring-0 w-full"
+                      type="text"
+                      ref={linkRef}
+                    />
                   </div>
                 </div>
 
