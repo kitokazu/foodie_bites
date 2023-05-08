@@ -45,6 +45,11 @@
     color: #AAA8A8;
   }
 
+  .selected {
+    font-weight: bold;
+    filter: saturate(150%); /* Increases the saturation of the image to make it more colorful */
+  }
+
   /* .menuBackground {
     background-image: radial-gradient(black 1px);
     background-size: 20px 20px;

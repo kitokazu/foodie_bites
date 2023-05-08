@@ -148,7 +148,7 @@ export default function Modal() {
             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
-            <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow:hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
+            <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-10 pb-4 text-left overflow:hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
               <div>
                 <div>
                   <a className="text-2xl font-bold">Share a bite...</a>
@@ -212,81 +212,142 @@ export default function Modal() {
                     {/* Rating */}
                     <div className="mt-4">
                       <p className="font-bold">Rating</p>
-                      <div className="flex gap-6 justify-center">
+                      <div className="flex gap-6 justify-center items-center">
                         <button onClick={() => handleRatingChange(5)}>
-                          <Image
-                            src={amazing}
-                            width={500}
-                            height={500}
-                            alt="IMAGE NOT FOUND"
-                            className={`mt-1 object-cover w-16 h-16 ${
-                              rating === 5 ? 'border-2 border-blue-500' : ''
-                            }`}
-                          />
+                          <div className="flex flex-col items-center">
+                            {' '}
+                            <Image
+                              src={amazing}
+                              width={500}
+                              height={500}
+                              alt="IMAGE NOT FOUND"
+                              className={`mt-1 object-cover w-16 h-16 ${
+                                rating === 5 ? 'border-2 border-blue-500' : ''
+                              }`}
+                            />
+                            <p
+                              className={`mt-1 text-amazing ${
+                                rating === 5
+                                  ? 'font-bold underline duration-300'
+                                  : ''
+                              }`}
+                            >
+                              AMAZING
+                            </p>
+                          </div>
                         </button>
                         <button onClick={() => handleRatingChange(4)}>
-                          <Image
-                            src={great}
-                            width={500}
-                            height={500}
-                            alt="IMAGE NOT FOUND"
-                            className={`mt-1 object-cover w-16 h-16 ${
-                              rating === 4 ? 'border-2 border-blue-500' : ''
-                            }`}
-                          />
+                          <div>
+                            {' '}
+                            <Image
+                              src={great}
+                              width={500}
+                              height={500}
+                              alt="IMAGE NOT FOUND"
+                              className={`mt-1 object-cover w-16 h-16 ${
+                                rating === 4 ? 'border-2 border-blue-500' : ''
+                              }`}
+                            />
+                            <p
+                              className={`mt-1 text-great ${
+                                rating === 4
+                                  ? 'font-bold underline duration-300'
+                                  : ''
+                              }`}
+                            >
+                              GREAT
+                            </p>
+                          </div>
                         </button>
                         <button onClick={() => handleRatingChange(3)}>
-                          <Image
-                            src={okay}
-                            width={500}
-                            height={500}
-                            alt="IMAGE NOT FOUND"
-                            className={`mt-1 object-cover w-16 h-16 ${
-                              rating === 3 ? 'border-2 border-blue-500' : ''
-                            }`}
-                          />
+                          <div>
+                            {' '}
+                            <Image
+                              src={okay}
+                              width={500}
+                              height={500}
+                              alt="IMAGE NOT FOUND"
+                              className={`mt-1 object-cover w-16 h-16 ${
+                                rating === 3 ? 'border-2 border-blue-500' : ''
+                              }`}
+                            />
+                            <p
+                              className={`mt-1 text-okay ${
+                                rating === 3
+                                  ? 'font-bold underline duration-300'
+                                  : ''
+                              }`}
+                            >
+                              OKAY
+                            </p>
+                          </div>
                         </button>
                         <button onClick={() => handleRatingChange(2)}>
-                          <Image
-                            src={meh}
-                            width={500}
-                            height={500}
-                            alt="IMAGE NOT FOUND"
-                            className={`mt-1 object-cover w-16 h-16 ${
-                              rating === 2 ? 'border-2 border-blue-500' : ''
-                            }`}
-                          />
+                          <div>
+                            {' '}
+                            <Image
+                              src={meh}
+                              width={500}
+                              height={500}
+                              alt="IMAGE NOT FOUND"
+                              className={`mt-1 object-cover w-16 h-16 ${
+                                rating === 2 ? 'border-2 border-blue-500' : ''
+                              }`}
+                            />
+                            <p
+                              className={`mt-1 text-meh ${
+                                rating === 2
+                                  ? 'font-bold underline duration-300'
+                                  : ''
+                              }`}
+                            >
+                              MEH
+                            </p>
+                          </div>
                         </button>
                         <button onClick={() => handleRatingChange(1)}>
-                          <Image
-                            src={awful}
-                            width={500}
-                            height={500}
-                            alt="IMAGE NOT FOUND"
-                            className={`mt-1 object-cover w-16 h-16 ${
-                              rating === 1 ? 'border-2 border-blue-500' : ''
-                            }`}
-                          />
+                          <div>
+                            {' '}
+                            <Image
+                              src={awful}
+                              width={500}
+                              height={500}
+                              alt="IMAGE NOT FOUND"
+                              className={`mt-1 object-cover w-16 h-16 ${
+                                rating === 1 ? 'border-2 border-blue-500' : ''
+                              }`}
+                            />
+                            <p
+                              className={`mt-1 text-awful ${
+                                rating === 1
+                                  ? 'font-bold underline duration-300'
+                                  : ''
+                              }`}
+                            >
+                              AWFUL
+                            </p>
+                          </div>
                         </button>
                       </div>
                     </div>
 
                     {/* Review */}
-                    <div className="grid grid-cols-2 mt-4">
-                      <div className="">Review: </div>
+                    <div className="mt-4">
+                      <div className="font-bold">Review: </div>
                       <textarea
-                        className="border ml-2 focus:ring-0 w-full"
+                        className="border mt-1 focus:ring-0 w-full rounded-lg bg-gray-100"
                         type="text"
-                        rows="4"
+                        rows="2"
                         ref={reviewRef}
                       />
                     </div>
                   </div>
+
                   {/* Link */}
-                  <div className="grid grid-cols-2 mt-4">
-                    <div className="">Link: </div>
+                  <div className="mt-4">
+                    <div className="font-bold">Link: </div>
                     <input
-                      className="border ml-2 focus:ring-0 w-full"
+                      className="mt-1 border focus:ring-0 w-full rounded-lg bg-gray-100"
                       type="text"
                       ref={linkRef}
                     />
