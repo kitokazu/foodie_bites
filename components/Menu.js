@@ -50,7 +50,7 @@ function Menu() {
                   className="menuItem"
                   onClick={() => router.push('/explorePage')}
                 >
-                  MESSAGES
+                  EXPLORE
                 </a>
                 <a className="menuItem" onClick={() => setOpen(true)}>
                   CREATE POST

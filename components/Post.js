@@ -52,6 +52,7 @@ function Post({
   review,
   date,
   location,
+  tags,
 }) {
   const apiKey = process.env.GOOGLE_PLACES_API_KEY
   const radius = 1000 // Radius of the search area in meters
@@ -236,7 +237,7 @@ function Post({
         <div>
           <div className="items-center ml-5">
             {/* TAGS */}
-            <PostTags rating={Math.floor(rating)} />
+            <PostTags rating={Math.floor(rating)} tags={tags} />
 
             {/* RATING */}
             <div className="flex mt-5">

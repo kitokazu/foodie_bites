@@ -5,6 +5,7 @@ import styles from '@/styles/Home.module.css'
 import Head from 'next/head'
 import Header from '@/components/Header'
 import Profile from '@/components/Profile'
+import Modal from '@/components/Modal'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,6 +20,7 @@ function profilePage({ name, image }) {
       </Head>
       <Header />
       <Profile user={name} image={image} />
+      <Modal />
     </>
   )
 }

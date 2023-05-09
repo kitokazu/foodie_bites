@@ -57,6 +57,7 @@ function Posts() {
             restaurant={post.data().restaurant}
             review={post.data().review}
             location={post.data().location}
+            tags={post.data().tags}
             date={<Moment fromNow>{date}</Moment>}
           />
         )
