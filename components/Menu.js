@@ -48,7 +48,7 @@ function Menu() {
                 </a>
                 <a
                   className="menuItem"
-                  onClick={() => router.push('/messagePage')}
+                  onClick={() => router.push('/explorePage')}
                 >
                   MESSAGES
                 </a>
