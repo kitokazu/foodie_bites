@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @layer components {
-/*   
+  /*   
   * {
     border: 1px solid red;
   } */
@@ -22,32 +22,34 @@
   }
 
   .text-amazing {
-    color: #20C997;
+    color: #20c997;
   }
 
   .text-great {
-    color: #94D82D;
+    color: #94d82d;
   }
 
   .text-okay {
-    color: #FCC419;
+    color: #fcc419;
   }
-  
+
   .text-meh {
-    color: #FC7819;
+    color: #fc7819;
   }
 
   .text-awful {
-    color: #FA5252;
+    color: #fa5252;
   }
 
   .custom-gray {
-    color: #AAA8A8;
+    color: #aaa8a8;
   }
 
   .selected {
     font-weight: bold;
-    filter: saturate(150%); /* Increases the saturation of the image to make it more colorful */
+    filter: saturate(
+      150%
+    ); /* Increases the saturation of the image to make it more colorful */
   }
 
   /* .menuBackground {
