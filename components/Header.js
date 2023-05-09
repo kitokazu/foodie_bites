@@ -29,10 +29,10 @@ function Header() {
 
   return (
     <div className="shadow-sm border-b bg-white sticky top-0 z-50">
-      <div className="flex justify-between bg-white max-w-6xl mx-5 xl:mx-auto">
+      <div className="flex justify-between bg-white max-w-6xl mx-5 xl:mx-auto mb-5">
         {/* Left Side */}
         <div
-          className="relative hidden lg:inline w-36 h-12 cursor-pointer"
+          className="relative hidden lg:inline w-36 h-12 cursor-pointer "
           onClick={() => router.push('/')}
         >
           <div
@@ -48,7 +48,7 @@ function Header() {
         </div>
 
         {/* Center --- SEARCH BAR */}
-        <div className="relative mt-3 p-3 rounded-md">
+        {/* <div className="relative mt-3 p-3 rounded-md">
           <div className="mt-2 absolute inset y-0 pl-3 flex items-center pointer-events-none">
             <MagnifyingGlassIcon className="h-5 w-5 text-gray-500" />
           </div>
@@ -57,10 +57,10 @@ function Header() {
             type="text"
             placeholder="Search"
           />
-        </div>
+        </div> */}
 
         {/* Right Side */}
-        <div className="flex dark:text-black items-center justify-end space-x-4">
+        <div className="mt-4 flex dark:text-black items-center justify-end space-x-4">
           <HomeIcon
             className="navBtn"
             onClick={() => router.push('/homePage')}

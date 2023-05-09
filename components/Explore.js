@@ -2,20 +2,18 @@ import React, { useEffect, useState, useRef, use } from 'react'
 import ExplorePosts from './ExplorePosts'
 // Import bruxies.jpeg fromm images folder
 import bruxies from '../images/bruxies.jpeg'
+import { MagnifyingGlassIcon } from '@heroicons/react/24/solid'
 
 const apiKey = process.env.GOOGLE_PLACES_API_KEY
 const mapApiJs = 'https://maps.googleapis.com/maps/api/js'
 const geocodeJson = 'https://maps.googleapis.com/maps/api/geocode/json'
 
-// const YELP_API_KEY = process.env.YELP_API_KEY
-
-const YELP_API_KEY =
-  'jspVL2FvCeSqLDwP1QcaXyL0kmYf-KuxB8OnGKtliCTGi2g5VFwUKsXUT7A0jw1ZVlbDxXekyEN78J6AktVkmpGw75O2ljcF7cbix6uJXmY1qBY5F3ooCLoD3cFZZHYx'
+const YELP_API_KEY = process.env.YELP_API_KEY
 
 export default function Explore() {
   const [restaurantData, setRestaurantData] = useState([])
 
-  const getResaurantsFromYelp = () => {
+  const getRestaurantsFromYelp = () => {
     console.log('FUNCTION BEING CALLED')
     // const yelpUrl = `https://api.yelp.com/v3/businesses/search?term=bruxies&location=Orange,CA`
     const yelpUrl = `/api/yelp?term=boba&location=Orange`
@@ -32,21 +30,30 @@ export default function Explore() {
   }
 
   useEffect(() => {
-    getResaurantsFromYelp()
+    getRestaurantsFromYelp()
 
     console.log({ restaurantData })
   }, [])
 
   return (
     <>
-      {' '}
-      <ExplorePosts name={'bruxies'} image={bruxies} location={'Orange, CA'} />
+      <div className="relative mt-3 p-3 rounded-md">
+        <div className="mt-2 absolute inset y-0 pl-3 flex items-center pointer-events-none">
+          <MagnifyingGlassIcon className="h-5 w-5 text-gray-500" />
+        </div>
+        <input
+          className="bg-gray-50 block w-full pl-10 sm:text-sm border-gray-300 focus:ring-black focus:border-black"
+          type="text"
+          placeholder="Search"
+        />
+      </div>
       <button
-        onClick={getResaurantsFromYelp}
+        onClick={getRestaurantsFromYelp}
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
       >
         Search
       </button>
+      <ExplorePosts props={restaurantData} />
     </>
   )
 }
