@@ -71,9 +71,16 @@ const reviewTitle = (rating) => {
   return 'N/A'
 }
 
+const options = [
+  { value: 'date', label: 'Date' },
+  { value: 'rating', label: 'Rating' },
+]
+
 export default function ProfilePosts({ username, image }) {
   const { data: session } = useSession()
   const [posts, setPosts] = useState([])
+
+  const [sort, setSort] = useState('date')
 
   useEffect(() => {
     // Using snapshot listener from firebase
@@ -99,21 +106,33 @@ export default function ProfilePosts({ username, image }) {
         }
       )
     }
-  }, [db, session, username])
+  }, [db, session, username, sort])
 
-  const sortPosts = (posts) => {
-    return posts.sort(
-      (a, b) => b.data().timestamp?.toDate() - a.data().timestamp?.toDate()
-    )
+  const sortPosts = (posts, sortType) => {
+    if (sortType == 'date') {
+      return posts.sort(
+        (a, b) => b.data().timestamp?.toDate() - a.data().timestamp?.toDate()
+      )
+    } else if (sortType == 'rating') {
+      return posts.sort((a, b) => b.data().rating - a.data().rating)
+    }
+  }
+
+  const sortByRating = (posts) => {
+    return posts.sort((a, b) => b.data().rating - a.data().rating)
+  }
+
+  const handleChange = (selectedOption) => {
+    setSort(selectedOption.value)
   }
 
   return (
     <div>
       <div className="flex justify-end">
         <p className="text-end mr-5 mt-1">Sort by :</p>
-        <Select className="mr-10" />
+        <Select className="mr-10" options={options} onChange={handleChange} />
       </div>
-      {sortPosts(posts).map((post) => {
+      {sortPosts(posts, sort).map((post) => {
         const date = post.data().timestamp?.toDate().toString()
 
         // console.log(post.data().timestamp?.toDate().toString())
