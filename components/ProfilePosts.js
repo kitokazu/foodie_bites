@@ -114,12 +114,9 @@ export default function ProfilePosts({ username, image }) {
         (a, b) => b.data().timestamp?.toDate() - a.data().timestamp?.toDate()
       )
     } else if (sortType == 'rating') {
+      // Sort by the date first and then rating
       return posts.sort((a, b) => b.data().rating - a.data().rating)
     }
-  }
-
-  const sortByRating = (posts) => {
-    return posts.sort((a, b) => b.data().rating - a.data().rating)
   }
 
   const handleChange = (selectedOption) => {
@@ -148,6 +145,7 @@ export default function ProfilePosts({ username, image }) {
             restaurant={post.data().restaurant}
             review={post.data().review}
             location={post.data().location}
+            tags={post.data().tags}
             date={<Moment fromNow>{date}</Moment>}
           />
         )

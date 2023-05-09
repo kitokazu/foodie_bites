@@ -2,6 +2,7 @@ import react from 'react'
 import Header from '@/components/Header'
 import Explore from '@/components/Explore'
 import Modal from '@/components/Modal'
+import Head from 'next/head'
 
 export default function explorePage() {
   return (

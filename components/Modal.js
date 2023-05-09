@@ -5,6 +5,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useState, useRef } from 'react'
 import { CameraIcon } from '@heroicons/react/24/outline'
 import { db, storage } from '../firebase'
+import ModalTags from './ModalTags'
 import {
   addDoc,
   collection,
@@ -33,10 +34,6 @@ export default function Modal() {
   // state for rating
   const [rating, setRating] = useState(null)
 
-  // const handleRatingChange = (event) => {
-  //   setRating(parseFloat(event.target.value))
-  // }
-
   const handleRatingChange = (rating) => {
     setRating(rating)
     ratingRef.current = rating
@@ -64,6 +61,9 @@ export default function Modal() {
   const linkRef = useRef(null)
   const ratingRef = useRef(null)
   const reviewRef = useRef(null)
+  const tagsRef = useRef(null)
+
+  console.log(tagsRef.current)
 
   // Function for uploading post
   const [loading, setLoading] = useState(false)
@@ -85,9 +85,9 @@ export default function Modal() {
 
       restaurant: restaurantRef.current.value,
       location: locationRef.current.value,
-      link: linkRef.current.value,
       rating: ratingRef.current,
       review: reviewRef.current.value,
+      tags: tagsRef.current,
 
       //use the servers timezone
       timestamp: serverTimestamp(),
@@ -148,7 +148,7 @@ export default function Modal() {
             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
-            <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-10 pb-4 text-left overflow:hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
+            <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-10 pb-4 text-left overflow:hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6 max-h-[600px] overflow-y-auto ">
               <div>
                 <div>
                   <a className="text-2xl font-bold">Share a bite...</a>
@@ -156,7 +156,6 @@ export default function Modal() {
                   <Dialog.Title as="h3" className="mt-5 leading-6 font-bold">
                     Upload Picture
                   </Dialog.Title>
-
                   {/* If a picture is not selected then render the camera icon */}
                   {selectedFile ? (
                     <Image
@@ -175,7 +174,6 @@ export default function Modal() {
                       <CameraIcon className="mt-2 ml-2 h-12 w-12 text-red-600" />
                     </div>
                   )}
-
                   <div>
                     <input
                       ref={filePickerRef}
@@ -184,7 +182,6 @@ export default function Modal() {
                       onChange={addImageToPost}
                     />
                   </div>
-
                   <div className="mt-3 flex flex-col sm:mt-5">
                     <div className="flex">
                       {/* Name of the place */}
@@ -200,7 +197,7 @@ export default function Modal() {
                       {/* Location */}
                       <div className="ml-10">
                         {' '}
-                        <p className="font-bold">Location: </p>
+                        <p className="font-bold">Location </p>
                         <input
                           className="mt-1 focus:ring-0 w-48 h-10 rounded-lg bg-gray-100"
                           type="text"
@@ -333,7 +330,7 @@ export default function Modal() {
 
                     {/* Review */}
                     <div className="mt-4">
-                      <div className="font-bold">Review: </div>
+                      <div className="font-bold">Review </div>
                       <textarea
                         className="border mt-1 focus:ring-0 w-full rounded-lg bg-gray-100"
                         type="text"
@@ -343,14 +340,20 @@ export default function Modal() {
                     </div>
                   </div>
 
-                  {/* Link */}
+                  {/* Link
                   <div className="mt-4">
-                    <div className="font-bold">Link: </div>
+                    <div className="font-bold">Link </div>
                     <input
                       className="mt-1 border focus:ring-0 w-full rounded-lg bg-gray-100"
                       type="text"
                       ref={linkRef}
                     />
+                  </div> */}
+
+                  {/* Tags */}
+                  <div className="mt-4">
+                    <p className="font-bold mb-2">Tags </p>
+                    <ModalTags tagsRef={tagsRef} />
                   </div>
                 </div>
 
