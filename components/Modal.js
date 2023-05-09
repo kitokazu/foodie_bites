@@ -63,8 +63,6 @@ export default function Modal() {
   const reviewRef = useRef(null)
   const tagsRef = useRef(null)
 
-  console.log(tagsRef.current)
-
   // Function for uploading post
   const [loading, setLoading] = useState(false)
 
