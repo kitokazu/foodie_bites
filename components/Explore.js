@@ -10,9 +10,8 @@ const mapApiJs = 'https://maps.googleapis.com/maps/api/js'
 const geocodeJson = 'https://maps.googleapis.com/maps/api/geocode/json'
 
 const YELP_API_KEY = process.env.YELP_API_KEY
-const GOOGLE_PLACES_API_KEY = 'AIzaSyB39HZG9yQjdwuScfStq7ErWjkYf2h6O44'
 
-const GOOGLE_MAPS_API_KEY = 'AIzaSyAYugfgOHqGJ8I03mtU9QabQTF3XTzyboA'
+const GOOGLE_MAPS_API_KEY = process.env.GOOGLE_MAPS_API_KEY
 
 export default function Explore() {
   const [restaurantData, setRestaurantData] = useState([])
