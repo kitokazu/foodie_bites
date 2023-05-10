@@ -20,7 +20,6 @@ export default function Home() {
       <Header />
       <Menu />
       <Modal />
-      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB39HZG9yQjdwuScfStq7ErWjkYf2h6O44&libraries=places&callback=initMap"async></script>
     </>
   )
 }

@@ -11,10 +11,17 @@ const geocodeJson = 'https://maps.googleapis.com/maps/api/geocode/json'
 
 const YELP_API_KEY = process.env.YELP_API_KEY
 
-const GOOGLE_MAPS_API_KEY = process.env.GOOGLE_MAPS_API_KEY
+// const GOOGLE_MAPS_API_KEY = process.env.GOOGLE_MAPS_API_KEY
+const GOOGLE_MAPS_API_KEY = 'AIzaSyAYugfgOHqGJ8I03mtU9QabQTF3XTzyboA'
 
 export default function Explore() {
   const [restaurantData, setRestaurantData] = useState([])
+  const [currentLocation, setCurrentLocation] = useState(null)
+  const [searchText, setSearchText] = useState('')
+
+  function handleSearchTextChange(value) {
+    setSearchText(value)
+  }
 
   const getRestaurantsFromYelp = () => {
     console.log('FUNCTION BEING CALLED')
@@ -38,21 +45,21 @@ export default function Explore() {
     console.log({ restaurantData })
   }, [])
 
+  console.log({ currentLocation })
+
   return (
     <>
       <div className="flex justify-center relative mt-3 p-3 rounded-md">
         <div className="flex ml-10">
-          <div className="w-64 h-10">
-            <label htmlFor="autocomplete" className="sr-only">
-              Enter a location
-            </label>
+          <div className="w-[400px] h-10 border rounded-md">
             <GooglePlacesAutocomplete
               apiKey={GOOGLE_MAPS_API_KEY}
-              autocompletionRequest={{
-                types: ['(cities)'],
+              selectProps={{
+                currentLocation,
+                onChange: setCurrentLocation,
+                placeholder: 'Search for a location',
               }}
-              id="autocomplete"
-              className="w-full h-full"
+              className="w-full h-full px-2 py-1 rounded-md"
             />
           </div>
 
