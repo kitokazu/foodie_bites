@@ -7,17 +7,19 @@ import ExplorePost from './ExplorePost'
 export default function ExplorePosts({ props }) {
   console.log(props)
   return (
-    <div>
-      {props.map((post) => {
-        // console.log(post.data().timestamp?.toDate().toString())
-        return (
-          <ExplorePost
-            restaurant={post.name}
-            location={post.location.display_address}
-            image={post.image_url}
-          />
-        )
-      })}
-    </div>
+    props && (
+      <div>
+        {props.map((post) => {
+          // console.log(post.data().timestamp?.toDate().toString())
+          return (
+            <ExplorePost
+              restaurant={post.name}
+              location={post.location.display_address}
+              image={post.image_url}
+            />
+          )
+        })}
+      </div>
+    )
   )
 }

@@ -16,17 +16,20 @@ const GOOGLE_MAPS_API_KEY = 'AIzaSyAYugfgOHqGJ8I03mtU9QabQTF3XTzyboA'
 
 export default function Explore() {
   const [restaurantData, setRestaurantData] = useState([])
-  const [currentLocation, setCurrentLocation] = useState(null)
-  const [searchText, setSearchText] = useState('')
+  const [currentLocation, setCurrentLocation] = useState('Orange, CA')
+  const [searchTerm, setSearchTerm] = useState('food')
 
-  function handleSearchTextChange(value) {
-    setSearchText(value)
+  function handleSearchTermChange(event) {
+    setSearchTerm(event.target.value)
+  }
+  const handleLocationChange = (locationJSON) => {
+    setCurrentLocation(locationJSON.label)
   }
 
   const getRestaurantsFromYelp = () => {
     console.log('FUNCTION BEING CALLED')
     // const yelpUrl = `https://api.yelp.com/v3/businesses/search?term=bruxies&location=Orange,CA`
-    const yelpUrl = `/api/yelp?term=restaurants&location=Orange`
+    const yelpUrl = `/api/yelp?term=${searchTerm}&location=${currentLocation}`
 
     const apiOptions = {
       headers: {
@@ -46,20 +49,33 @@ export default function Explore() {
   }, [])
 
   console.log({ currentLocation })
+  console.log({ searchTerm })
 
   return (
     <>
       <div className="flex justify-center relative mt-3 p-3 rounded-md">
         <div className="flex ml-10">
-          <div className="w-[400px] h-10 border rounded-md">
+          <div className="flex mr-10">
+            {' '}
+            <p className="ml-10">Term</p>
+            <input
+              className="border mt-5 h-10"
+              value={searchTerm}
+              onChange={handleSearchTermChange}
+            />
+          </div>
+
+          <div className="w-[400px] h-10 rounded-md">
+            {/* Have the user able to serach term and location*/}
+            <p className="">Location</p>
             <GooglePlacesAutocomplete
               apiKey={GOOGLE_MAPS_API_KEY}
               selectProps={{
                 currentLocation,
-                onChange: setCurrentLocation,
+                onChange: handleLocationChange,
                 placeholder: 'Search for a location',
               }}
-              className="w-full h-full px-2 py-1 rounded-md"
+              className="w-full h-full px-2 py-1 mt-5 rounded-md"
             />
           </div>
 
