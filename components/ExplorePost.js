@@ -1,7 +1,19 @@
 import React from 'react'
 import Image from 'next/image'
+import PostTags from './PostTags'
+import Modal from './Modal'
+import { useRecoilState } from 'recoil'
+import { modalState } from '../atoms/modalAtom'
 
-export default function ExplorePost({ restaurant, location, image }) {
+export default function ExplorePost({ restaurant, location, image, tags }) {
+  const convertTags = (tags) => {
+    return tags.map((tag) => tag.title).join(', ')
+  }
+
+  const categories = convertTags(tags)
+  // Set function
+  const [open, setOpen] = useRecoilState(modalState)
+
   return (
     <div
       className="flex bg-white my-7 border
@@ -22,9 +34,11 @@ export default function ExplorePost({ restaurant, location, image }) {
       </div>
       {/* Header */}
       <div className="ml-3 items-center p-5">
-        <p className={`text-5xl font-sans font-bold uppercase`}>{restaurant}</p>
-        <div className="flex-1"></div>
-        <div className="text-start mr-10 mt-2">
+        <p className={`text-5xl font-sans font-bold uppercase mb-3`}>
+          {restaurant}
+        </p>
+        <PostTags tags={categories} className="" />
+        <div className="text-start mr-10 mt-4">
           <p className="text-xl font-sans custom-gray font-bold">
             {location[0]}
           </p>
@@ -35,7 +49,7 @@ export default function ExplorePost({ restaurant, location, image }) {
 
         {/*Post a review*/}
         <button
-          onClick={() => {}}
+          onClick={() => setOpen(true)}
           className="mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         >
           POST A REVIEW

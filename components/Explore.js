@@ -54,7 +54,13 @@ export default function Explore() {
   return (
     <>
       <div className="flex justify-center relative mt-3 p-3 rounded-md">
-        <div className="flex ml-10">
+        <div className="flex">
+          {/* Find a spot*/}
+          <div className="">
+            <p className="text-xl">Find a spot</p>
+          </div>
+
+          {/*Search Term*/}
           <div className="flex mr-10">
             {' '}
             <p className="ml-10">Term</p>
@@ -65,8 +71,9 @@ export default function Explore() {
             />
           </div>
 
+          {/*Location*/}
           <div className="w-[400px] h-10 rounded-md">
-            {/* Have the user able to serach term and location*/}
+            {/* Have the user able to location*/}
             <p className="">Location</p>
             <GooglePlacesAutocomplete
               apiKey={GOOGLE_MAPS_API_KEY}

@@ -16,6 +16,7 @@ export default function ExplorePosts({ props }) {
               restaurant={post.name}
               location={post.location.display_address}
               image={post.image_url}
+              tags={post.categories}
             />
           )
         })}
