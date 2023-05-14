@@ -17,7 +17,7 @@ const GOOGLE_MAPS_API_KEY = 'AIzaSyAYugfgOHqGJ8I03mtU9QabQTF3XTzyboA'
 export default function Explore() {
   const [restaurantData, setRestaurantData] = useState([])
   const [currentLocation, setCurrentLocation] = useState('Orange, CA')
-  const [searchTerm, setSearchTerm] = useState('food')
+  const [searchTerm, setSearchTerm] = useState('')
 
   function handleSearchTermChange(event) {
     setSearchTerm(event.target.value)
@@ -53,50 +53,32 @@ export default function Explore() {
 
   return (
     <>
-      <div className="flex justify-center relative mt-3 p-3 rounded-md">
-        <div className="flex">
-          {/* Find a spot*/}
-          <div className="">
-            <p className="text-xl">Find a spot</p>
-          </div>
-
-          {/*Search Term*/}
-          <div className="flex mr-10">
-            {' '}
-            <p className="ml-10">Term</p>
+      <div className="flex flex-col items-center mt-8">
+        <h1 className="text-3xl font-bold mb-4 text-left">Find a spot</h1>
+        <div className="w-full max-w-3xl p-6 rounded-md shadow-lg flex space-x-4">
+          <div className="w-full flex items-center border rounded-md">
             <input
-              className="border mt-5 h-10"
+              className="w-full h-10 px-3 rounded-md focus:outline-none"
+              type="text"
+              placeholder="Term"
               value={searchTerm}
               onChange={handleSearchTermChange}
             />
           </div>
-
-          {/*Location*/}
-          <div className="w-[400px] h-10 rounded-md">
-            {/* Have the user able to location*/}
-            <p className="">Location</p>
+          <div className="w-full flex items-center border rounded-md">
             <GooglePlacesAutocomplete
               apiKey={GOOGLE_MAPS_API_KEY}
               selectProps={{
                 currentLocation,
                 onChange: handleLocationChange,
                 placeholder: 'Search for a location',
+                className: 'w-full px-3 py-2 rounded-md focus:outline-none',
               }}
-              className="w-full h-full px-2 py-1 mt-5 rounded-md"
             />
           </div>
-
-          {/* <div className="flex">
-            <input
-              className="bg-gray-50 block pl-10 sm:text-sm border-gray-300 focus:ring-black focus:border-black"
-              type="text"
-              placeholder="Search"
-            />
-          </div> */}
-
           <button
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
             onClick={getRestaurantsFromYelp}
-            className="ml-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
           >
             Search
           </button>
