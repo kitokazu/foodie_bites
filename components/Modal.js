@@ -24,7 +24,7 @@ import meh from '../public/images/meh.png'
 import okay from '../public/images/okay.png'
 import great from '../public/images/great.png'
 
-export default function Modal() {
+export default function Modal({ data }) {
   // Session Data
   const { data: session } = useSession()
 

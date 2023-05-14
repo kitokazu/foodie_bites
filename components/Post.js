@@ -278,7 +278,11 @@ function Post({
           <Link href="https://cortinasitalianfood.com/">
             <BuildingStorefrontIcon className="btn" />
           </Link>
-          <TrashIcon className="btn" onClick={() => setShowModal(true)} />
+          {session.user.username === username ? (
+            <TrashIcon className="btn" onClick={() => setShowModal(true)} />
+          ) : (
+            <div></div>
+          )}
         </div>
       )}
 

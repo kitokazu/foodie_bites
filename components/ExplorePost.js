@@ -2,7 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import PostTags from './PostTags'
 import Modal from './Modal'
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useSetRecoilState } from 'recoil'
 import { modalState } from '../atoms/modalAtom'
 
 export default function ExplorePost({ restaurant, location, image, tags }) {
@@ -13,6 +13,15 @@ export default function ExplorePost({ restaurant, location, image, tags }) {
   const categories = convertTags(tags)
   // Set function
   const [open, setOpen] = useRecoilState(modalState)
+
+  const setModalState = useSetRecoilState(modalState)
+
+  function openModalWithData(test) {
+    setModalState({
+      isOpen: true,
+      data: 'TEST',
+    })
+  }
 
   return (
     <div
