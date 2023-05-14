@@ -6,6 +6,7 @@ import {
   FaceSmileIcon,
   ChatBubbleBottomCenterTextIcon,
   BuildingStorefrontIcon,
+  TrashIcon,
 } from '@heroicons/react/24/outline'
 
 import Link from 'next/link'
@@ -28,6 +29,7 @@ import {
 import { db } from '../firebase'
 import Moment from 'react-moment'
 import PostTags from './PostTags'
+import DeleteModal from './DeleteModal'
 
 import amazing from '../public/images/amazing.png'
 import awful from '../public/images/awful.png'
@@ -64,6 +66,7 @@ function Post({
   const [likes, setLikes] = useState([])
   const [hasLiked, setHasLiked] = useState(false)
   const router = useRouter()
+  const [showModal, setShowModal] = useState(false)
 
   useEffect(
     () =>
@@ -163,44 +166,20 @@ function Post({
     5: amazing,
   }
 
-  /*var axios = require('axios');
+  const deletePost = async (postId) => {
+    try {
+      // 1) Delete the post document from the 'posts' collection
+      await deleteDoc(doc(db, 'posts', postId))
 
-  fetch(url)
-    .then((response) => response.json())
-    .then((data) => {
-      console.log();
-    })
-    .catch((error) => {
-      console.error(error);
-  var config = {
-    method: 'get',
-    url: `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522%2C151.1957362&radius=1500&type=restaurant&keyword=cruise&key=${apiKey}`,
-    headers: { }
-  };
-  
-  axios(config)
-  .then(function (response) {
-    console.log(JSON.stringify(response.data));
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
-*/
+      // 2) Delete the image file from Firebase Storage
+      const imageRef = ref(storage, `posts/${postId}/image`)
+      await deleteObject(imageRef)
 
-  /*function getLocation(ip) {
-  const url = `https://geo.ipify.org/api/v2?apiKey=at_etN2Agi7mkKqdjfcDhYLN4UqfKHRf&ipAddress=${ip}`;
-  https.get(url, (res) => {
-    let data = "";
-    res.on("data", (chunk) => {
-      data += chunk;
-    });
-    res.on("end", () => {
-      const location = JSON.parse(data);
-      console.log("Latitude:", location.location.lat);
-      console.log("Longitude:", location.location.lng);
-    });
-  });
-} */
+      console.log(`Post with ID ${postId} successfully deleted.`)
+    } catch (error) {
+      console.error('Error deleting post:', error)
+    }
+  }
 
   return (
     <div
@@ -299,6 +278,7 @@ function Post({
           <Link href="https://cortinasitalianfood.com/">
             <BuildingStorefrontIcon className="btn" />
           </Link>
+          <TrashIcon className="btn" onClick={() => setShowModal(true)} />
         </div>
       )}
 
@@ -365,6 +345,11 @@ function Post({
             Post
           </button>
         </form>
+      )}
+
+      {/* Confirmation modal */}
+      {showModal && (
+        <DeleteModal postId={id} onClose={() => setShowModal(false)} />
       )}
     </div>
   )
