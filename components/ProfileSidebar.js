@@ -51,23 +51,35 @@ function ProfileSidebar({ username, image }) {
   }, [db, session, username])
 
   // Get the length of the posts that are ranked 5
-  const fiveStarPosts = posts.filter((post) => post.data().rating == 5)
+  const fiveStarPosts = posts.filter(
+    (post) => Math.floor(post.data().rating) == 5
+  )
   const fiveStarPostsLength = fiveStarPosts.length
 
   // Get the length of the posts that are ranked 4
-  const fourStarPosts = posts.filter((post) => post.data().rating == 4)
+  const fourStarPosts = posts.filter(
+    (post) => Math.floor(post.data().rating) == 4
+  )
   const fourStarPostsLength = fourStarPosts.length
 
   // Get the length of the posts that are ranked 3
-  const threeStarPosts = posts.filter((post) => post.data().rating == 3)
+  const threeStarPosts = posts.filter(
+    (post) => Math.floor(post.data().rating) == 3
+  )
   const threeStarPostsLength = threeStarPosts.length
 
   // Get the length of the posts that are ranked 2
-  const twoStarPosts = posts.filter((post) => post.data().rating == 2)
+  const twoStarPosts = posts.filter(
+    (post) => Math.floor(post.data().rating) == 2
+  )
   const twoStarPostsLength = twoStarPosts.length
 
-  // Get the length of the posts that are ranked 1
-  const oneStarPosts = posts.filter((post) => post.data().rating == 1)
+  // Get the length of the posts that are ranked 1 or 0
+  const oneStarPosts = posts.filter(
+    (post) =>
+      Math.floor(post.data().rating) == 1 || Math.floor(post.data().rating) == 0
+  )
+
   const oneStarPostsLength = oneStarPosts.length
 
   const reviewColor = (rating) => {
