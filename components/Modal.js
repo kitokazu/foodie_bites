@@ -109,6 +109,9 @@ export default function Modal() {
 
     const imageRef = ref(storage, `posts/${docRef.id}/image`)
 
+    console.log('imageRef', imageRef)
+    console.log('selectedFile', selectedFile)
+
     await uploadString(imageRef, selectedFile, 'data_url').then(
       async (snapshot) => {
         const downloadURL = await getDownloadURL(imageRef)
