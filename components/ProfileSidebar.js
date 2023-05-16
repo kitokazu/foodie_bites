@@ -98,7 +98,7 @@ function ProfileSidebar({ username, image }) {
   }
 
   return (
-    <div className="w-1/4 bg-gray-200 h-screen">
+    <div className="w-1/4 h-screen">
       <div className="avatar justify-center ml-10">
         <div className="w-48 h-48 rounded-full overflow-hidden">
           <Image

@@ -14,12 +14,14 @@ export default function ExplorePost({ restaurant, location, image, tags }) {
   // Set function
   const [open, setOpen] = useRecoilState(modalState)
 
-  const setModalState = useSetRecoilState(modalState)
-
-  function openModalWithData(test) {
-    setModalState({
+  function openModalWithData(restaurant, location) {
+    setOpen({
       isOpen: true,
-      data: 'TEST',
+      data: {
+        restaurant: restaurant,
+        location: location,
+        image: image,
+      },
     })
   }
 
@@ -58,7 +60,7 @@ export default function ExplorePost({ restaurant, location, image, tags }) {
 
         {/*Post a review*/}
         <button
-          onClick={() => setOpen(true)}
+          onClick={() => openModalWithData(restaurant, location)}
           className="mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         >
           POST A REVIEW

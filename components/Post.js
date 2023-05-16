@@ -194,13 +194,14 @@ function Post({
           {restaurant}
         </p>
         <div className="flex-1"></div>
-        <div className="text-start mr-10 mt-2">
+        {/* Location */}
+        <div className="text-end mt-2 w-60">
           <p className="text-xl font-sans custom-gray font-bold">{location}</p>
         </div>
       </div>
 
       {/* Body 1 */}
-      <div className="flex">
+      <div className="flex pr-2">
         {/* Image */}
         <div className="ml-12 rounded-xl w-64 h-80 overflow-hidden">
           <Image

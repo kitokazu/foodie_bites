@@ -24,12 +24,22 @@ import meh from '../public/images/meh.png'
 import okay from '../public/images/okay.png'
 import great from '../public/images/great.png'
 
-export default function Modal({ data }) {
+export default function Modal() {
   // Session Data
   const { data: session } = useSession()
 
   // Recoil state for rendering the modal
   const [open, setOpen] = useRecoilState(modalState)
+
+  console.log(open?.data?.image)
+
+  // Funciton for closing the modal:
+  const closeModal = () => {
+    setOpen({
+      isOpen: false,
+      data: null,
+    })
+  }
 
   // state for rating
   const [rating, setRating] = useState(null)
@@ -42,6 +52,10 @@ export default function Modal({ data }) {
   // useRef hook for file picking
   const filePickerRef = useRef()
   const [selectedFile, setSelectedFile] = useState(null)
+
+  // if (open?.data?.image != null) {
+  //   setSelectedFile(open?.data?.image)
+  // }
 
   // function for handling the file
   const addImageToPost = (e) => {
@@ -104,17 +118,17 @@ export default function Modal({ data }) {
       }
     )
 
-    setOpen(false)
+    closeModal()
     setLoading(false)
     setSelectedFile(null)
   }
 
   return (
-    <Transition.Root show={open} as={Fragment}>
+    <Transition.Root show={open.isOpen} as={Fragment}>
       <Dialog
         as="div"
         className="fixed z-10 inset-0 overflow-auto"
-        onClose={setOpen}
+        onClose={closeModal}
       >
         <div className="flex items-end justify-center min-h-[800px] sm:min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
           <Transition.Child
@@ -156,18 +170,45 @@ export default function Modal({ data }) {
                   </Dialog.Title>
                   {/* If a picture is not selected then render the camera icon */}
                   {selectedFile ? (
-                    <Image
-                      src={selectedFile}
-                      width={100}
-                      height={100}
-                      className="w-40 object-contain cursor-pointer"
-                      onClick={() => setSelectedFile(null)}
-                      alt=""
-                    />
+                    <div className="flex">
+                      {' '}
+                      <Image
+                        src={selectedFile}
+                        width={100}
+                        height={100}
+                        className="w-40 object-contain cursor-pointer"
+                        onClick={() => setSelectedFile(null)}
+                        alt=""
+                      />
+                      <div
+                        onClick={() => filePickerRef.current.click()}
+                        className="mt-10 ml-10 flex items-start justify-start h-16 w-16 rounded-lg bg-gray-200 cursor-pointer"
+                      >
+                        <CameraIcon className="mt-2 ml-2 h-12 w-12 text-red-600" />
+                      </div>
+                    </div>
+                  ) : open?.data?.image ? (
+                    <div className="flex">
+                      {' '}
+                      <Image
+                        src={open?.data?.image}
+                        width={100}
+                        height={100}
+                        className="w-40 object-contain cursor-pointer"
+                        onClick={() => setSelectedFile(null)}
+                        alt=""
+                      />
+                      <div
+                        onClick={() => filePickerRef.current.click()}
+                        className="mt-10 ml-10 flex items-start justify-start h-16 w-16 rounded-lg bg-gray-200 cursor-pointer"
+                      >
+                        <CameraIcon className="mt-2 ml-2 h-12 w-12 text-red-600" />
+                      </div>
+                    </div>
                   ) : (
                     <div
                       onClick={() => filePickerRef.current.click()}
-                      className="mt-2 flex items-start justify-start h-16 w-16 rounded-lg bg-gray-200 cursor-pointer"
+                      className="mt-5 ml-5 flex items-start justify-start h-16 w-16 rounded-lg bg-gray-200 cursor-pointer"
                     >
                       <CameraIcon className="mt-2 ml-2 h-12 w-12 text-red-600" />
                     </div>
@@ -189,6 +230,7 @@ export default function Modal({ data }) {
                         <input
                           className="mt-1 focus:ring-0 w-48 h-10 rounded-lg bg-gray-100"
                           type="text"
+                          defaultValue={open?.data?.restaurant}
                           ref={restaurantRef}
                         />
                       </div>
@@ -199,6 +241,7 @@ export default function Modal({ data }) {
                         <input
                           className="mt-1 focus:ring-0 w-48 h-10 rounded-lg bg-gray-100"
                           type="text"
+                          defaultValue={open?.data?.location}
                           ref={locationRef}
                         />
                       </div>

@@ -23,6 +23,14 @@ function Menu() {
   const { data: session } = useSession()
   const [open, setOpen] = useRecoilState(modalState)
 
+  // Function to open the modal
+  function openModal() {
+    setOpen({
+      isOpen: true,
+      data: null,
+    })
+  }
+
   return (
     <div className="h-screen flex items-center bg-gray-50">
       <div className="text-6xl font-serif text-stone-600 ml-60 hover:text-opacity-50">
@@ -52,7 +60,7 @@ function Menu() {
                 >
                   EXPLORE
                 </a>
-                <a className="menuItem" onClick={() => setOpen(true)}>
+                <a className="menuItem" onClick={() => openModal()}>
                   CREATE POST
                 </a>
               </>

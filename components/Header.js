@@ -22,6 +22,14 @@ function Header() {
   // Set function
   const [open, setOpen] = useRecoilState(modalState)
 
+  // Function to open the modal
+  function openModal() {
+    setOpen({
+      isOpen: true,
+      data: null,
+    })
+  }
+
   // // If we want a read only value
   // const open2 = useRecoilValue(modalState);
 
@@ -68,10 +76,7 @@ function Header() {
 
           {session ? (
             <>
-              <PlusCircleIcon
-                className="navBtn"
-                onClick={() => setOpen(true)}
-              />
+              <PlusCircleIcon className="navBtn" onClick={() => openModal()} />
               <MagnifyingGlassIcon
                 className="navBtn"
                 onClick={() => router.push('/explorePage')}
